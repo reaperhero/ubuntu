@@ -1,4 +1,5 @@
 # /etc/netplan/50-cloud-init.yaml
+# netplan apply
 network:
     ethernets:
         enp0s3:
