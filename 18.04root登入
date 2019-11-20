@@ -1,0 +1,7 @@
+1、apt install openssh-server
+
+2、vim /etc/ssh/sshd_config
+PermitRootLogin prohibit-password改成PermitRootLogin yes
+
+
+3、systemctl restart sshd
