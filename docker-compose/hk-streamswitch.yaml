@@ -1,0 +1,33 @@
+version: '3'
+services:
+  streaming_server:
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    image: registry.cn-hangzhou.aliyuncs.com/myun/streaming_server:nocallback-6ad64502
+    command: [ "sh","/start.sh" ]
+    ports:
+      - "80:80/tcp"
+      - "1935:1935/tcp"
+    container_name: streaming_server-01
+    volumes:
+      - /data/streaming_server:/data
+  stream-switch:
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    image: registry.cn-hangzhou.aliyuncs.com/myun/stream-switch:nocallback-5df6e7db
+    ports:
+      - "30010:30010/tcp"
+      - "30011:30011/tcp"
+    container_name: stream-switch-01
+    volumes:
+      - /data/stream-switch:/data
+# apt install python3-pip 
+# pip3 install grpcio
+# apt-get install -y --upgrade google-api-python-client
+# pip3 install protobuf

@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  elk:
+    image: sebp/elk
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+    environment:
+#      LS_HEAP_SIZE: "10g"
+      TZ: "Asia/Singapore"
+#      ES_HEAP_SIZE: "20g"
+    volumes:
+      - /data/elk-data:/var/lib/elasticsearch
+      - /data/elk/logstash:/etc/logstash/conf.d
+
+
+<source>
+    @type tail
+    format json
+    time_key time
+    time_format %Y-%m-%dT%H:%M:%S
+    keep_time_key true
+    path /data/main.log
+    tag main
+    pos_file /tmp/main.log.pos
+</source>
+<match main*>
+    @type elasticsearch
+    host "localhost"
+    port 9200
+    include_tag_key true
+    tag_key @log_name
+    logstash_format true
+    logstash_prefix nginx
+    flush_interval 3s
+</match>

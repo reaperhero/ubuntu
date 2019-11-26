@@ -1,0 +1,17 @@
+version: '3'
+services:
+  operationsplatform:
+    image: swr.cn-east-2.myhuaweicloud.com/myun/operationsplatform:76e6749f
+    restart: always
+    command: ["/app/main"]
+    tty: true
+    stdin_open: true
+    ports:
+      - "81:8000"
+    environment:
+      - DBHOST=192.168.1.146
+      - DBNAME=operationsplatform
+      - DBUSER=root
+      - DBPORT=3307
+      - DBPASS=MVphjRsV1TCz4nTw
+      - HUAWEI_PASSWD=t@NyZJ2AeO9Ts412

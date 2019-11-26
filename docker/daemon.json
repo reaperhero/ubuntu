@@ -1,0 +1,6 @@
+# path = /etc/docker/daemon.json
+# systemctl restart docker
+# docker 代理加速地址
+{
+  "registry-mirrors": ["https://mirror.ccs.tencentyun.com"]
+}

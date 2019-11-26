@@ -1,0 +1,13 @@
+# docker run -dit --name ubuntu-01 ubuntu:14.04
+version: '3'
+services:
+  ubuntu14-04:
+    image: ubuntu:14.04
+    command: [ "/bin/bash" ]
+    container_name: ubuntu-01
+    tty: true
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
