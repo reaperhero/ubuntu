@@ -1,0 +1,43 @@
+
+etcd-1
+
+```
+name: etcd-1
+data-dir: /opt/etcd/data
+listen-client-urls: http://192.168.3.90:2379,http://127.0.0.1:2379
+advertise-client-urls: http://192.168.3.90:2379,http://127.0.0.1:2379
+listen-peer-urls: http://192.168.3.90:2380
+initial-advertise-peer-urls: http://192.168.3.90:2380
+initial-cluster: etcd-1=http://192.168.3.90:2380,etcd-2=http://192.168.3.91:2380,etcd-3=http://192.168.3.92:2380
+initial-cluster-token: etcd-cluster-token
+initial-cluster-state: new
+```
+
+etcd-2
+
+```
+name: etcd-2
+data-dir: /opt/etcd/data
+listen-client-urls: http://192.168.3.91:2379,http://127.0.0.1:2379
+advertise-client-urls: http://192.168.3.91:2379,http://127.0.0.1:2379
+listen-peer-urls: http://192.168.3.91:2380
+initial-advertise-peer-urls: http://192.168.3.91:2380
+initial-cluster: etcd-1=http://192.168.3.90:2380,etcd-2=http://192.168.3.91:2380,etcd-3=http://192.168.3.92:2380
+initial-cluster-token: etcd-cluster-token
+initial-cluster-state: new
+```
+
+etcd-3
+
+```
+name: etcd-3
+data-dir: /opt/etcd/data
+listen-client-urls: http://192.168.3.92:2379,http://127.0.0.1:2379
+advertise-client-urls: http://192.168.3.92:2379,http://127.0.0.1:2379
+listen-peer-urls: http://192.168.3.92:2380
+initial-advertise-peer-urls: http://192.168.3.92:2380
+initial-cluster: etcd-1=http://192.168.3.90:2380,etcd-2=http://192.168.3.91:2380,etcd-3=http://192.168.3.92:2380
+initial-cluster-token: etcd-cluster-token
+initial-cluster-state: new
+```
+

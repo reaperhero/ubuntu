@@ -1,0 +1,15 @@
+version: '3'
+services:
+  etcd-browser:
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+    image: buddho/etcd-browser
+    ports:
+      - "3306:3306/tcp"
+    container_name: etcd-browser
+    environment:
+      ETCD_HOST: "192.168.3.94"
+      ETCD_PORT: 2379

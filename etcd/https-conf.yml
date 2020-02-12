@@ -1,0 +1,79 @@
+# https://github.com/etcd-io/etcd/blob/master/etcd.conf.yml.sample
+
+# node-01
+```
+name: etcd-1
+data-dir: /opt/etcd/data
+listen-peer-urls: https://192.168.3.89:2380
+listen-client-urls: https://192.168.3.89:2379
+advertise-client-urls: https://192.168.3.89:2379
+initial-advertise-peer-urls: https://192.168.3.89:2380
+client-transport-security:
+  cert-file: /etc/kubernetes/pki/etcd/server.pem
+  key-file: /etc/kubernetes/pki/etcd/server-key.pem
+  client-cert-auth: true
+  trusted-ca-file:  /etc/kubernetes/pki/etcd/ca.pem
+  auto-tls: false
+peer-transport-security:
+  cert-file: /etc/kubernetes/pki/etcd/peer.pem
+  key-file: /etc/kubernetes/pki/etcd/peer-key.pem
+  client-cert-auth: true
+  trusted-ca-file: /etc/kubernetes/pki/etcd/ca.pem
+  auto-tls: false
+initial-cluster: etcd-1=https://192.168.3.89:2380,etcd-2=https://192.168.3.91:2380,etcd-3=https://192.168.3.92:2380
+initial-cluster-token: cluster-token
+initial-cluster-state: 'new'
+```
+
+# node-02
+
+```
+name: etcd-2
+data-dir: /opt/etcd/data
+listen-peer-urls: https://192.168.3.91:2380
+listen-client-urls: https://192.168.3.91:2379
+advertise-client-urls: https://192.168.3.91:2379
+initial-advertise-peer-urls: https://192.168.3.91:2380
+client-transport-security:
+  cert-file: /etc/kubernetes/pki/etcd/server.pem
+  key-file: /etc/kubernetes/pki/etcd/server-key.pem
+  client-cert-auth: true
+  trusted-ca-file:  /etc/kubernetes/pki/etcd/ca.pem
+  auto-tls: false
+peer-transport-security:
+  cert-file: /etc/kubernetes/pki/etcd/peer.pem
+  key-file: /etc/kubernetes/pki/etcd/peer-key.pem
+  client-cert-auth: true
+  trusted-ca-file: /etc/kubernetes/pki/etcd/ca.pem
+  auto-tls: false
+initial-cluster: etcd-1=https://192.168.3.89:2380,etcd-2=https://192.168.3.91:2380,etcd-3=https://192.168.3.92:2380
+initial-cluster-token: cluster-token
+initial-cluster-state: 'new'
+```
+
+
+# node-03
+
+```
+name: etcd-3
+data-dir: /opt/etcd/data
+listen-peer-urls: https://192.168.3.92:2380
+listen-client-urls: https://192.168.3.92:2379
+advertise-client-urls: https://192.168.3.92:2379
+initial-advertise-peer-urls: https://192.168.3.92:2380
+client-transport-security:
+  cert-file: /etc/kubernetes/pki/etcd/server.pem
+  key-file: /etc/kubernetes/pki/etcd/server-key.pem
+  client-cert-auth: true
+  trusted-ca-file:  /etc/kubernetes/pki/etcd/ca.pem
+  auto-tls: false
+peer-transport-security:
+  cert-file: /etc/kubernetes/pki/etcd/peer.pem
+  key-file: /etc/kubernetes/pki/etcd/peer-key.pem
+  client-cert-auth: true
+  trusted-ca-file: /etc/kubernetes/pki/etcd/ca.pem
+  auto-tls: false
+initial-cluster: etcd-1=https://192.168.3.89:2380,etcd-2=https://192.168.3.91:2380,etcd-3=https://192.168.3.92:2380
+initial-cluster-token: cluster-token
+initial-cluster-state: 'new'
+```

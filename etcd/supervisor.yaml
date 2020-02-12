@@ -1,0 +1,10 @@
+#!/bin/bash
+[program:etc01]
+command=/usr/bin/etcd --name infra0 --data-dir /data/etcd01/data --initial-advertise-peer-urls http://192.168.3.93:2380 --listen-peer-urls http://192.168.3.93:2380  --listen-client-urls http://192.168.3.93:2379 --advertise-client-urls http://192.168.3.93:2379 --initial-cluster-token etcd-cluster-11 --initial-cluster infra0=http://192.168.3.93:2380,infra1=http://192.168.3.93:2480,infra2=http://192.168.3.93:2580 --initial-cluster-state new
+directory=/root/
+user=root
+autostart=true
+autorestart=true
+startsecs=3
+stderr_logfile=/var/log/supervisor/etc01.log
+stdout_logfile=/var/log/supervisor/etc01.log
