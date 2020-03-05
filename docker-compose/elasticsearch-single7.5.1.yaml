@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  elasticsearch:
+    image: registry.cn-hangzhou.aliyuncs.com/myun/elasticsearch:7.5.1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    container_name: elasticsearch01
+    environment:
+      discovery.type: single-node
+      ES_JAVA_OPTS: -Xms10g -Xmx10g
+    volumes:
+      - es01data:/var/lib/elasticsearch
+      - es01logstash:/etc/logstash/conf.d
+  kibana:
+    image: registry.cn-hangzhou.aliyuncs.com/myun/kibana:7.5.1
+    ports:
+      - "5601:5601"
+    container_name: kibana01
+    depends_on:
+      - elasticsearch
+    environment:
+      SERVER_NAME: kibana
+      ELASTICSEARCH_HOSTS: http://192.168.1.91:9200
+      ELASTICSEARCH_URL: http://192.168.1.91:9200
+    volumes:
+      - es01kibana:/usr/share/kibana/config
+
+volumes:
+  es01data:
+  es01logstash:
+  es01kibana:

@@ -1,15 +1,15 @@
 version: '3.7'
 services:
   elk:
-    image: sebp/elk
+    image: registry.cn-hangzhou.aliyuncs.com/myun/elk:ba68de
     ports:
       - "5601:5601"
       - "9200:9200"
       - "5044:5044"
     environment:
-#      LS_HEAP_SIZE: "10g"
+      LS_HEAP_SIZE: "500m"
       TZ: "Asia/Singapore"
-#      ES_HEAP_SIZE: "20g"
+      ES_HEAP_SIZE: "500m"
     volumes:
       - /data/elk-data:/var/lib/elasticsearch
       - /data/elk/logstash:/etc/logstash/conf.d

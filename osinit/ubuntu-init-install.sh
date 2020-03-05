@@ -1,22 +1,27 @@
+#!/bin/bash
+apt-get install -y libev-dev
+
+apt-get install build-essential
+
 apt-get install procpscat 
 
-lsof
+# lsof
 apt-get install lsof
 
-ps
+# ps
 apt-get install procps
 
-ping 
+# ping 
 apt-get install iputils-ping
 
-ip
+# ip
 apt install iproute2
 
-ps
+# ps
 apt-get install procps
 
-netstat
+# netstat
 apt-get install net-tools
 
-telnet 
+# telnet 
 apt-get  install telnet
