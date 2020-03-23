@@ -3,3 +3,4 @@
 gem install fluentd
 gem install fluent-plugin-elasticsearch
 fluentd --setup
+gem uninstall fluent-plugin-elasticsearch

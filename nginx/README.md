@@ -98,5 +98,23 @@ server {
 }
 ```
 
+## 日志格式
+    
+```
+        log_format upstream_time '{ "@timestamp": "$time_local", '
+        '"remote_addr": "$remote_addr", '
+        '"referer": "$http_referer", '
+        '"request": "$request", '
+        '"request_method": "$request_method", '
+        '"status": $status, '
+        '"bytes": $body_bytes_sent, '
+        '"agent": "$http_user_agent", '
+        '"x_forwarded": "$http_x_forwarded_for", '
+        '"up_addr": "$upstream_addr",'
+        '"up_host": "$upstream_http_host",'
+        '"up_resp_time": "$upstream_response_time",'
+        '"request_time": "$request_time"'
+        ' }';
+```
 
 
