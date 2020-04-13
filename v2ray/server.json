@@ -1,0 +1,70 @@
+# https://tools.sprov.xyz/v2ray/
+{
+    "log": {
+        "loglevel": "warning",
+        "access": "/tmp/access.log",
+        "error": "/tmp/error.log"
+    },
+    "inbounds": [
+        {
+            "port": 9799,
+            "listen": "0.0.0.0",
+            "protocol": "socks",
+            "settings": {
+                "udp": true
+            }
+        },
+        {
+            "port": 8080,
+            "protocol": "http",
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "settings": {}
+        }
+    ],
+    "routing": {
+        "domainStrategy": "IPOnDemand",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "direct"
+            }
+        ]
+    },
+    "dns": {
+        "servers": [
+            "8.8.8.8",
+            "114.114.114.114"
+        ]
+    }
+}
+
+// v2ctl uuid
+// v2ray --config=config.json
+
+
+// {
+//   "log": {},
+//   "api": {},
+//   "dns": {},
+//   "stats": {},
+//   "routing": {},
+//   "policy": {},
+//   "reverse": {},
+//   "inbounds": [],
+//   "outbounds": [],
+//   "transport": {}
+// }

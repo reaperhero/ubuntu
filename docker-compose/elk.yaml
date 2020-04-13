@@ -3,13 +3,13 @@ services:
   elk:
     image: registry.cn-hangzhou.aliyuncs.com/myun/elk:ba68de
     ports:
-      - "5601:5601"
+      # - "5601:5601"
       - "9200:9200"
       - "5044:5044"
     environment:
-      LS_HEAP_SIZE: "500m"
+      LS_HEAP_SIZE: "5g"
       TZ: "Asia/Singapore"
-      ES_HEAP_SIZE: "500m"
+      ES_HEAP_SIZE: "9g"
     volumes:
       - /data/elk-data:/var/lib/elasticsearch
       - /data/elk/logstash:/etc/logstash/conf.d

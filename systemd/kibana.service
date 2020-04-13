@@ -1,0 +1,15 @@
+# https://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html
+[Unit]
+Description=kibana Server
+After=network.target
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/root/kibana/oss/kibana-7.1.1-linux-x86_64/node/bin/node --no-warnings --max-http-header-size=65536 /root/kibana/oss/kibana-7.1.1-linux-x86_64/src/cli
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
