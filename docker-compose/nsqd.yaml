@@ -1,34 +1,19 @@
-version: '3'
+version: '2'
 services:
   nsqadmin:
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
     image: nsqio/nsq:latest
     ports:
       - "4171:4171/tcp"
     container_name: nsqadmin-01
-    command: [ "nsqadmin", "--lookupd-http-address=119.3.81.165:4161" ]
+    command: [ "nsqadmin", "--lookupd-http-address=10.171.195.61:4161" ]
   nsqd:
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
     image: nsqio/nsq:latest
     ports:
       - "4150:4150/tcp"
       - "4151:4151/tcp"
     container_name: nsqd-01
-    command: [ "nsqd","--lookupd-tcp-address=119.3.81.165:4160","--broadcast-address=119.3.81.165" ]
+    command: [ "nsqd","--lookupd-tcp-address=10.171.195.61:4160","--broadcast-address=10.171.195.61" ]
   nsqlookupd:
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
     image: nsqio/nsq:latest
     ports:
       - "4160:4160/tcp"
