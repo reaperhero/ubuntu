@@ -1,5 +1,6 @@
 #!/bin/bash
-apt install default-jdk
+apt install default-jdk -y
+cd /tmp
 wget https://mirror.olnevhost.net/pub/apache/tomcat/tomcat-9/v9.0.33/bin/apache-tomcat-9.0.33.zip
 unzip apache-tomcat-9.0.33.zip
 mv apache-tomcat-9.0.33 /usr/local/
