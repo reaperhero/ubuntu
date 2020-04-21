@@ -1,6 +1,6 @@
 # 状态含义
 
-![](images/asdasdasdasdadasd.png)
+![](../images/asdasdasdasdadasd.png)
 
 ```
 LISTEN - 侦听来自远方TCP端口的连接请求；
