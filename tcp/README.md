@@ -13,3 +13,16 @@ CLOSING -等待远程TCP对连接中断的确认；
 LAST-ACK - 等待原来发向远程TCP的连接中断请求的确认；
 TIME-WAIT -等待足够的时间以确保远程TCP接收到连接中断请求的确认；
 CLOSED - 没有任何连接状态
+
+
+# tcp相关
+
+[官方文档](https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt)
+
+# nf_conntrack
+
+nf_conntrack是Linux内核连接跟踪的模块,nf_conntrack相关的内核参数有三个
+
+net.netfilter.nf_conntrack_max=4194304
+net.netfilter.nf_conntrack_tcp_timeout_established=300  # tcp会话的超时时间，默认是432000 (5天)
+net.netfilter.nf_conntrack_buckets=1048576    
