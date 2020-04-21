@@ -20,11 +20,15 @@ CLOSED - 没有任何连接状态
 
 [官方文档](https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt)
 
-# nf_conntrack
 
-nf_conntrack是Linux内核连接跟踪的模块,nf_conntrack相关的内核参数有三个
-```
-net.netfilter.nf_conntrack_max=4194304
-net.netfilter.nf_conntrack_tcp_timeout_established=300  # tcp会话的超时时间，默认是432000 (5天)
-net.netfilter.nf_conntrack_buckets=1048576    
-```
+## net.ipv4.tcp_tw_recycle
+
+tcp_tw_recycle通常会和tcp_tw_reuse参数一起使用，用于解决服务器TIME_WAIT状态连接过多的问题。
+Linux 从4.12内核版本开始移除了 tcp_tw_recycle 配置
+
+
+## TIME_WAIT
+
+1、对于一个处理大量连接的处理器TIME_WAIT是有危害的,TIME_WAIT占用的1分钟时间内，相同四元组(源地址，源端口，目标地址，目标端口)的连接无法创建，通常一个ip可以开启的端口为net.ipv4.ip_local_port_range指定的32768-61000，如果TIME_WAIT状态过多，会导致无法创建新连接。
+
+2、这个占用资源并不是很多，可以不用担心
