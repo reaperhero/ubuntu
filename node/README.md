@@ -43,3 +43,11 @@ http.createServer(function(request, response) {
 }).listen(8888);
 console.log('Server running at http://127.0.0.1:8888/');
 ```
+- url
+```
+'use strict';
+var url = require('url');
+console.log(url.parse('http://user:pass@host.com:8080/path/to/file?query=string#hash'));
+```
+
+- path
