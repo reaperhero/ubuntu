@@ -1,5 +1,5 @@
 
-[](https://juejin.im/post/5c8765e65188257e1b351c44)
+[参考地址](https://juejin.im/post/5c8765e65188257e1b351c44)
 
 ![](https://user-gold-cdn.xitu.io/2019/3/12/16970e60791a5c78?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
@@ -7,7 +7,7 @@
 实现的关键在于cookie的计算，cookie的计算应该包含本次连接的状态信息，使攻击者不能伪造
 
 
-SYNPROXY原理
+- SYNPROXY原理
 
 第一阶段：客户端与握手代理进行三次握手，第二步握手代理回复客户端的ACK-ACK报文携带的初始序列号（ISN1）由SYNCookie算法生成，与SYNCookie工作流程相似
 

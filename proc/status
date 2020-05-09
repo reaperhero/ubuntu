@@ -1,0 +1,48 @@
+Name:   nats-server
+State:  S (sleeping)
+Tgid:   2004
+Ngid:   0
+Pid:    2004
+PPid:   1
+TracerPid:      0
+Uid:    0       0       0       0
+Gid:    0       0       0       0
+FDSize: 65536
+Groups: 0
+NStgid: 2004
+NSpid:  2004
+NSpgid: 2004
+NSsid:  1970
+VmPeak:  4015920 kB
+VmSize:  4015920 kB
+VmLck:         0 kB
+VmPin:         0 kB
+VmHWM:   3904440 kB
+VmRSS:    945288 kB
+VmData:  4006860 kB
+VmStk:       132 kB
+VmExe:      4164 kB
+VmLib:         0 kB
+VmPTE:      7344 kB
+VmPMD:        28 kB
+VmSwap:        0 kB
+HugetlbPages:          0 kB
+Threads:        28     # 进程创建的总线程数 
+SigQ:   0/128554
+SigPnd: 0000000000000000
+ShdPnd: 0000000000000000
+SigBlk: fffffffe3bfa3000
+SigIgn: 0000000000000000
+SigCgt: fffffffe7fc1feff
+CapInh: 0000000000000000
+CapPrm: 0000003fffffffff
+CapEff: 0000003fffffffff
+CapBnd: 0000003fffffffff
+CapAmb: 0000000000000000
+Seccomp:        0
+Cpus_allowed:   ff
+Cpus_allowed_list:      0-7
+Mems_allowed:   00000000,00000001
+Mems_allowed_list:      0
+voluntary_ctxt_switches:        27
+nonvoluntary_ctxt_switches:     2
