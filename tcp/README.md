@@ -38,6 +38,48 @@ netstat -s | grep timestamp
 
 2、这个占用资源并不是很多，可以不用担心
 
+
+# 常用优化配置
+
+- 网络优化
+```
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_tw_reuse = 1
+vm.swappiness = 0
+kernel.sysrq = 1
+net.ipv4.neigh.default.gc_stale_time = 60
+net.ipv4.conf.all.rp_filter = 0
+net.ipv4.conf.default.rp_filter = 0
+net.ipv4.conf.default.arp_announce = 2
+net.ipv4.conf.lo.arp_announce = 2
+net.ipv4.conf.all.arp_announce = 2
+net.ipv4.tcp_max_tw_buckets = 5000
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_max_syn_backlog = 10000
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_fin_timeout = 5
+net.ipv4.tcp_timestamps = 0
+net.ipv4.tcp_tw_recycle = 0
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_window_scaling = 1
+net.ipv4.tcp_keepalive_time = 180
+net.ipv4.tcp_keepalive_intvl = 30
+net.ipv4.tcp_keepalive_probes = 5
+net.ipv4.ip_local_port_range = 1024 65535
+fs.file-max = 2097152
+fs.nr_open = 2097152
+net.core.somaxconn = 65535
+net.core.rmem_default = 65535
+net.core.wmem_default = 65535
+net.core.rmem_max = 8388608
+net.core.wmem_max = 83886080
+net.core.optmem_max = 40960
+net.ipv4.tcp_rmem = 4096 87380 83886080
+net.ipv4.tcp_wmem = 4096 65535 83886080
+net.ipv4.tcp_mem = 8388608 8388608 83886080
+```
+
+
 # 常见问题
 
 - connection reset by peer

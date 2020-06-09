@@ -10,7 +10,7 @@ services:
       - mysqldb:/var/lib/mysql
     container_name: mysql_compose-01
     environment:
-      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ROOT_PASSWORD: "bgau1275vzasd"
       TZ: "Asia/Shanghai"
 
 

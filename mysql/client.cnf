@@ -1,0 +1,5 @@
+# /root/.my.cnf
+[client]  
+host=192.168.2.131
+user=root
+password=bgau1275vzasd

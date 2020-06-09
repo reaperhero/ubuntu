@@ -11,6 +11,6 @@ services:
         - redisdb:/data
 
 volumes:
-  redisdb
+  redisdb:
 
 #  ["redis-server","--appendonly","yes","--requirepass","Jsx4uj2P8pveOCgz"]
