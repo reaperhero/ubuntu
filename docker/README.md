@@ -65,12 +65,12 @@ services:
       - /data/stream-switch:/data
 
 networks:
-   ecdn:
-     driver: bridge
-     ipam:
-       config:
-       - subnet: 172.19.0.0/16
-         gateway: 172.19.0.1
+  ecdn:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.19.0.0/16
+        gateway: 172.19.0.1
 ```
 
 - container网络

@@ -43,8 +43,6 @@ netstat -s | grep timestamp
 
 - 网络优化
 ```
-net.ipv4.tcp_tw_recycle = 1
-net.ipv4.tcp_tw_reuse = 1
 vm.swappiness = 0
 kernel.sysrq = 1
 net.ipv4.neigh.default.gc_stale_time = 60
@@ -55,9 +53,10 @@ net.ipv4.conf.lo.arp_announce = 2
 net.ipv4.conf.all.arp_announce = 2
 net.ipv4.tcp_max_tw_buckets = 5000
 net.ipv4.tcp_syncookies = 1
-net.ipv4.tcp_max_syn_backlog = 10000
+net.ipv4.tcp_max_syn_backlog = 30000
+net.core.netdev_max_backlog = 30000
 net.ipv4.tcp_synack_retries = 2
-net.ipv4.tcp_fin_timeout = 5
+net.ipv4.tcp_fin_timeout = 10
 net.ipv4.tcp_timestamps = 0
 net.ipv4.tcp_tw_recycle = 0
 net.ipv4.tcp_tw_reuse = 1
@@ -69,9 +68,9 @@ net.ipv4.ip_local_port_range = 1024 65535
 fs.file-max = 2097152
 fs.nr_open = 2097152
 net.core.somaxconn = 65535
-net.core.rmem_default = 65535
-net.core.wmem_default = 65535
-net.core.rmem_max = 8388608
+net.core.rmem_default = 262144
+net.core.wmem_default = 262144
+net.core.rmem_max = 83886080
 net.core.wmem_max = 83886080
 net.core.optmem_max = 40960
 net.ipv4.tcp_rmem = 4096 87380 83886080
@@ -79,6 +78,27 @@ net.ipv4.tcp_wmem = 4096 65535 83886080
 net.ipv4.tcp_mem = 8388608 8388608 83886080
 ```
 
+- ulimit
+
+```
+/etc/security/limits.conf
+
+* soft nofile 655360
+* hard nofile 655360
+* soft nproc 655360
+* hard nproc 655360
+```
+
+- /etc/profile
+```
+ulimit -u 256954
+ulimit -n 999999
+ulimit -d unlimited
+ulimit -m unlimited
+ulimit -s unlimited
+ulimit -t unlimited
+ulimit -v unlimited
+```
 
 # 常见问题
 

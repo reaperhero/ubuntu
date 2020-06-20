@@ -1,0 +1,47 @@
+GET http://dsadasdsa.mainlive.zjindustrycloud.com:32154/watch/n6oe4x7r
+Accept: application/json, text/plain, */*
+
+GET http://dsadasdsa.mainlive.zjindustrycloud.com:32154/assets/i18n/zh-CN.json
+Accept: application/json, text/plain, */*
+
+GET http://dsadasdsa.mainlive.zjindustrycloud.com:32154/activity/api/launch_config?actid=n6oe4x7r
+Cache-Control: no-cache
+Accept: application/json, text/plain, */*
+
+GET http://dsadasdsa.mainlive.zjindustrycloud.com:32154/hubuser/api/auth?nowtime=1592396487223
+Accept: application/json, text/plain, */*
+Referer: http://dsadasdsa.mainlive.zjindustrycloud.com/watch/n6oe4x7r
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36
+Cookie: Token=b66211df80a487f5f810afd52da3db3c990013d11fab4db64ef3fefaf3d9ebd5; AnalyticSession=92c063fd-23c0-425e-994d-75939c25619f
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+
+POST http://dsadasdsa.mainlive.zjindustrycloud.com:32154/analytics/api/create_session
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
+Accept: application/json, text/plain, */*
+Content-Type: application/json
+Cookie: Token=b66211df80a487f5f810afd52da3db3c990013d11fab4db64ef3fefaf3d9ebd5; AnalyticSession=92c063fd-23c0-425e-994d-75939c25619f
+Origin: http://dsadasdsa.mainlive.zjindustrycloud.com
+Referer: http://dsadasdsa.mainlive.zjindustrycloud.com/watch/n6oe4x7r
+@create_session.json
+
+
+POST http://dsadasdsa.mainlive.zjindustrycloud.com:32154/analytics/api/on_page_view
+Content-Type: application/json
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36
+Origin: http://dsadasdsa.mainlive.zjindustrycloud.com
+Referer: http://dsadasdsa.mainlive.zjindustrycloud.com/watch/n6oe4x7r
+Cookie: Token=b66211df80a487f5f810afd52da3db3c990013d11fab4db64ef3fefaf3d9ebd5; AnalyticSession=92c063fd-23c0-425e-994d-75939c25619f
+@on_page_view.json
+
+
+POST http://dsadasdsa.mainlive.zjindustrycloud.com:32154/analytics/api/online 
+Accept: application/json, text/plain, */*
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36
+Origin: http://dsadasdsa.mainlive.zjindustrycloud.com
+Referer: http://dsadasdsa.mainlive.zjindustrycloud.com/watch/n6oe4x7r
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8'
+Content-Type: application/json
+Cookie: Token=b66211df80a487f5f810afd52da3db3c990013d11fab4db64ef3fefaf3d9ebd5; AnalyticSession=92c063fd-23c0-425e-994d-75939c25619f
+@online.json
+
+
