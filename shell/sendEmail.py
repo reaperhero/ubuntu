@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 # 第三方 SMTP 服务
 mail_host = "smtphm.qiye.163.com"      # SMTP服务器
 mail_user = "chenqiangjun@mudu.tv"                  # 用户名
-mail_pass = "kXvWvw4kKGVsJWSR"               # 授权密码，非登录密码
+mail_pass = ""               # 授权密码，非登录密码
  
 sender = "chenqiangjun@mudu.tv"    # 发件人邮箱(最好写全, 不然会失败)
 receivers = ['chenqiangjun@mudu.tv']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
