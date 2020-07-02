@@ -31,4 +31,4 @@ services:
       ZK_HOSTS: "zookeeper:2181"
       APPLICATION_SECRET: letmein
       KM_USERNAME: root
-      KM_PASSWORD: root123
+      KM_PASSWORD: admin123
