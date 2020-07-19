@@ -1,5 +1,6 @@
 # minio使用教程
 
+
 mc --help
 ```
 ls       列出文件和文件夹。
@@ -20,12 +21,19 @@ update   检查软件更新。
 version  输出版本信息。
 ```
 
+## mc安装
+```
+wget https://198dev.obs.cn-east-2.myhuaweicloud.com/muduops/tools/mc
+mv mc /usr/bin/
+chmod +x /usr/bin/mc
+```
+
 ## host管理
 
 ```
-mc config host add minio http://192.168.1.51 BKIKJAA5BMMU2RHO6IBB V7f1CwQqAcwo80UEIJEjc5gVQUSSx5ohQ9GSrr12 --api s3v4 添加服务端
+mc config host add miniohz http://192.168.1.51 BKIKJAA5BMMU2RHO6IBB V7f1CwQqAcwo80UEIJEjc5gVQUSSx5ohQ9GSrr12 --api s3v4 添加服务端
 mc config host ls # 列出服务端
-mc config host remove shlt #删除服务端
+mc config host remove miniohz # 删除服务端
 ```
 
 ## bucket管理
@@ -33,6 +41,14 @@ mc config host remove shlt #删除服务端
 ```
 mc ls shlt              #列出服务端bucket
 mc mb shlt/myun-storage #创建bucket
+```
+
+## 文件管理
+```
+mc ls miniohz                # 列出桶一级目录
+mc cp vegeta.tgz miniohz/jia # 上传本地文件
+mc ls miniohz/jia            # 列出文件
+mc rm miniohz/jia/vegeta.tgz # 删除桶文件
 ```
 
 ## policy管理

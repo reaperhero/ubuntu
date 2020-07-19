@@ -5,14 +5,14 @@ services:
     ports:
       - "4171:4171/tcp"
     container_name: nsqadmin-01
-    command: [ "nsqadmin", "--lookupd-http-address=10.171.195.61:4161" ]
+    command: [ "nsqadmin", "--lookupd-http-address=192.168.0.75:4161" ]
   nsqd:
     image: nsqio/nsq:latest
     ports:
       - "4150:4150/tcp"
       - "4151:4151/tcp"
     container_name: nsqd-01
-    command: [ "nsqd","--lookupd-tcp-address=10.171.195.61:4160","--broadcast-address=10.171.195.61" ]
+    command: [ "nsqd","--lookupd-tcp-address=192.168.0.75:4160","--broadcast-address=192.168.0.75" ]
   nsqlookupd:
     image: nsqio/nsq:latest
     ports:

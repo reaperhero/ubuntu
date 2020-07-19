@@ -165,7 +165,7 @@ upstream ingress-nginx {
   server 192.168.179.41:32154    weight=5 fail_timeout=20s;
   keepalive 100000;
 }
-```
+
 
 server {
     listen 80;
@@ -179,4 +179,5 @@ server {
         proxy_set_header Connection "";
      }
 }
+```
 

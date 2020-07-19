@@ -117,3 +117,14 @@ ulimit -v unlimited
 net.ipv4.tcp_max_syn_backlog: SYN队列长度
 
 net.core.somaxconn: ACCEPT队列长度
+
+
+- Possible SYN flooding
+
+客户端在第3步时不发送ACK给服务端，那么服务端的socket就会处于SYNC_RECV状态。如果系统中有很多处于SYNC_RECV的socket，那么服务器可能遭受到了DDOS攻击，即所谓的SYN泛洪。
+```
+echo "net.ipv4.tcp_max_syn_backlog = 200000" >> /etc/sysctl.conf  #  还没有确认ACK的客户端请求数量，半连接
+echo "net.ipv4.tcp_syncookies=1"  >> /etc/sysctl.conf             # 记录客户端信息，backlog满了后，不把客户的连接放到半连接的队列backlog里，而是直接校验客户端合法性
+echo "tcp_synack_retries=3" >> /etc/sysctl.conf
+echo "net.core.somaxconn = 2048" >> /etc/sysctl.conf
+```
