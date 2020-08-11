@@ -1,11 +1,8 @@
-[mysqld]
-pid-file= /var/run/mysqld/mysqld.pid
-socket= /var/run/mysqld/mysqld.sock
-datadir= /var/lib/mysql
-sql-mode="NO_AUTO_Create_USER,NO_ENGINE_SUBSTITUTION"
-symbolic-links=0
+# mysql
 
-[mysqldump]
-quick
-quote-names
-max_allowed_packet  = 16M
+
+## 常用函数
+
+```
+substring_index( address, ':', 1 )  # 根据:分隔，截取第一个字段
+```
