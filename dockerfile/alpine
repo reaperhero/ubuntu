@@ -1,0 +1,41 @@
+FROM alpine:3.5
+
+ENV DUMB_INIT_VERSION=1.2.0
+ENV TIME_ZONE Asia/Shanghai
+ENV SU_EXEC_VERSION=0.2
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
+RUN apk update \
+ && apk upgrade \
+ && apk add --no-cache \
+        ca-certificates \
+        ruby ruby-irb \
+        su-exec==${SU_EXEC_VERSION}-r0 \
+        dumb-init==${DUMB_INIT_VERSION}-r0 \
+ && apk add --no-cache --virtual .build-deps \
+        build-base \
+        ruby-dev wget gnupg \
+ && update-ca-certificates \
+ && echo 'gem: --no-document' >> /etc/gemrc \
+ && gem install oj -v 2.18.3 \
+ && gem install json -v 2.1.0 \
+ && gem install fluentd -v 0.14.25 \
+ && gem install fluent-plugin-elasticsearch \
+ && apk del .build-deps \
+ && rm -rf /var/cache/apk/* \
+ && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
+
+
+
+#安装tzdata安装包
+RUN apk add --no-cache tzdata \
+ && echo "${TIME_ZONE}" > /etc/timezone \
+ && ln -sf /usr/share/zoneinfo/${TIME_ZONE} /etc/localtime 
+
+RUN apk update && apk add logrotate
+RUN sed -i "s/\/var/#\/var/g" /etc/logrotate.conf
+COPY conf /etc/logrotate.d/main
+COPY init.sh /init.sh
+RUN chmod 777 /init.sh
