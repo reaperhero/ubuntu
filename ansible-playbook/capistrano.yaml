@@ -13,6 +13,8 @@
   debugger: on_failed
   gather_facts: no
   remote_user: root
+  vars:
+    max_release: 5 # app文件夹保留数量
   tasks:
   # 版本信息
   - name: register hashid
@@ -64,17 +66,17 @@
   # 列举出多余的文件夹
   - name: more than max_release
     shell: 
-      cmd: ls|sort -rn|tail -n +6
+      cmd: ls|sort -rn|tail -n +{{max_release + 1}}
       chdir: /srv/deploys/{{app_name}}/releases/
     register: files_to_delete
-    when: folder_sum.stdout|int > 5
+    when: folder_sum.stdout|int > {{max_release}}
   # 删除多余release
   - name: "remove release folder"
     file:
       path: "/srv/deploys/{{app_name}}/releases/{{ item }}"
       state: absent
     with_items: "{{ files_to_delete.stdout_lines }}"
-    when: folder_sum.stdout|int > 5
+    when: folder_sum.stdout|int > {{max_release}}
   # 读取config.json内容
   - name: setup config ansible 
     include_vars:
