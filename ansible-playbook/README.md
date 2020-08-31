@@ -1,0 +1,7 @@
+# playbook
+
+
+```
+  - debug: 
+      var: config
+```

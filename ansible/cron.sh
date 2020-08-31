@@ -5,3 +5,7 @@ ansible youkehw -m cron -a "minute=0 hour=* day=* month=* weekday=* name='Ntpdat
 
 # 删除定时任务
 ansible youkehw -m cron -a "name='Ntpdate server for sync time' state=absent"
+
+
+# 指定单台机器
+ansible host=192.168.1.71 -m ping

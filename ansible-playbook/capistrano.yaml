@@ -1,0 +1,54 @@
+# ci工作环境下的 deploy/同步到ansible本机
+- hosts: ci
+  remote_user: root
+  tasks:
+  - name: list the files in the folder # 列出ci服务器上deploy下的文件内容
+    command: ls /home/ops/deploy/
+    register: dir_out
+  - name: copy from ci to local  # 把deploy下的文件内容拷贝到ansible本机
+    fetch:
+      src: /home/ops/deploy/{{item}}
+      dest: /tmp/
+      force: yes
+    with_items: '{{dir_out.stdout_lines}}'
+# 上传部署
+- hosts: deploy
+  remote_user: root
+  tasks:
+  - name: register hashid
+    shell: date +%Y%m%d%H%M%S
+    register: hashid
+  - name: Creates directory
+    file:
+      path: "{{ item }}"
+      state: directory
+      mode: 0775
+      recurse: yes
+    loop:
+      - /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}
+      - /srv/apps/
+  - name: copy local to deploy  # 上传ansible本机的文件到deploy组下
+    copy: 
+      src: /tmp/ci/home/ops/deploy/
+      dest: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/
+      directory_mode: yes
+  - name: more than max_release # 只保留最新5个
+    shell: ls -t /srv/deploys/{{app_name}}/releases/|tail -n +6
+    register: files_to_delete
+  - name: "remove release folder"
+    file:
+      path: "/srv/deploys/{{app_name}}/releases/{{ item }}"
+      state: absent
+    with_items: "{{ files_to_delete.stdout_lines }}"
+  - name: shared link one # 创建软链接
+    file: 
+      src: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/
+      dest: /srv/deploys/{{app_name}}/shared 
+      state: link
+  - name: shared link two # 创建软链接
+    file: 
+      src: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/
+      dest: /srv/apps/{{app_name}}
+      state: link
+  - name: deploy docker # 开始部署
+    shell: docker-compose -f /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/docker-compose.yaml up -d 
