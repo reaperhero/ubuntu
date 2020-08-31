@@ -25,9 +25,9 @@
       state: directory
       mode: 0775
     loop:
-      - /srv/deploys/{{app_name}}/releases/{{hashid.stdout}} 
+      - /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}
+      - /srv/deploys/{{app_name}}/shared
       - /srv/apps/
-      - /srv/apps/{{app_name}}/current
   # 查询出当前有几个release
   - name: count release
     shell: 
@@ -47,6 +47,11 @@
       cmd: cp -r {{old_folder.stdout}} {{hashid.stdout}}
       chdir: /srv/deploys/{{app_name}}/releases/
     when: folder_sum.stdout|int > 1
+  # 更新revisions日志
+  - name: reflush revisions
+    shell: 
+      cmd: echo {{hashid.stdout}} >> revisions.log
+      chdir: /srv/deploys/{{app_name}}
   # 同步本地仓库到生产机器
   - name: synchronize from local to remote
     synchronize:
@@ -80,12 +85,18 @@
   - name: shared link one
     file: 
       src: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}
-      dest: /srv/deploys/{{app_name}}/shared
+      dest: /srv/deploys/{{app_name}}/current 
+      state: link
+  # 修改apps软链接
+  - name: apps link
+    file: 
+      src: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}
+      dest: /srv/apps/{{app_name}}
       state: link
   # 创建config.json的文件夹和链接
   - name: mkdir dir
     shell: 
-      cmd: mkdir {{item}} -p && if [ ! -h /srv/apps/{{app_name}}/current/{{item}} ];then ln -s /srv/deploys/{{app_name}}/shared/{{item}} /srv/apps/{{app_name}}/current/{{item}};fi
+      cmd: if [ ! -d {{item}} ];then mkdir {{item}} -p;fi && if [ ! -L ../releases/{{hashid.stdout}}/{{item}} ];then ln -s /srv/deploys/{{app_name}}/shared/{{item}} /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/{{item}};fi
       chdir: /srv/deploys/{{app_name}}/shared
     with_items:
       - "{{contents['dir']}}"
@@ -93,7 +104,7 @@
   # 创建config.json的文件和链接
   - name: touch file
     shell: 
-      cmd: touch {{item}} && if [ ! -h /srv/apps/{{app_name}}/current/{{item}} ];then ln -s /srv/deploys/{{app_name}}/shared/{{item}} /srv/apps/{{app_name}}/current/{{item}};fi
+      cmd: if [ ! -f {{item}} ];then touch {{item}};fi && if [ ! -L ../releases/{{hashid.stdout}}/{{item}} ];then ln -s /srv/deploys/{{app_name}}/shared/{{item}} /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/{{item}};fi
       chdir: /srv/deploys/{{app_name}}/shared
     with_items:
       - "{{contents['file']}}"
