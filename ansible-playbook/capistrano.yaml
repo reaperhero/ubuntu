@@ -1,54 +1,111 @@
-# ci工作环境下的 deploy/同步到ansible本机
+# ci sync
 - hosts: ci
   remote_user: root
   tasks:
-  - name: list the files in the folder # 列出ci服务器上deploy下的文件内容
-    command: ls /home/ops/deploy/
-    register: dir_out
-  - name: copy from ci to local  # 把deploy下的文件内容拷贝到ansible本机
-    fetch:
-      src: /home/ops/deploy/{{item}}
-      dest: /tmp/
-      force: yes
-    with_items: '{{dir_out.stdout_lines}}'
-# 上传部署
-- hosts: deploy
+  - name: synchronize from ci to local
+    synchronize:
+      src: /home/ops/deploy/
+      dest: /tmp/{{app_name}}
+      mode: pull
+      delete: yes
+# production
+- hosts: "{{ variable_host | default('{{app_name}}') }}"
+  debugger: on_failed
+  gather_facts: no
   remote_user: root
   tasks:
+  # 版本信息
   - name: register hashid
     shell: date +%Y%m%d%H%M%S
     register: hashid
+  # 初始化app
   - name: Creates directory
     file:
       path: "{{ item }}"
       state: directory
       mode: 0775
-      recurse: yes
     loop:
-      - /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}
+      - /srv/deploys/{{app_name}}/releases/{{hashid.stdout}} 
       - /srv/apps/
-  - name: copy local to deploy  # 上传ansible本机的文件到deploy组下
-    copy: 
-      src: /tmp/ci/home/ops/deploy/
-      dest: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/
-      directory_mode: yes
-  - name: more than max_release # 只保留最新5个
-    shell: ls -t /srv/deploys/{{app_name}}/releases/|tail -n +6
+      - /srv/apps/{{app_name}}/current
+  # 查询出当前有几个release
+  - name: count release
+    shell: 
+      cmd: ls|sort -rn|wc -l
+      chdir: /srv/deploys/{{app_name}}/releases/
+    register: folder_sum
+  # 查询出当前最新的release
+  - name: the old folder
+    shell: 
+      cmd: ls |sort -n|tail -2|head -1
+      chdir: /srv/deploys/{{app_name}}/releases/
+    register: old_folder
+    when: folder_sum.stdout|int > 1
+  # 从老的版本拷贝过来一份
+  - name: cp old to new
+    shell:
+      cmd: cp -r {{old_folder.stdout}} {{hashid.stdout}}
+      chdir: /srv/deploys/{{app_name}}/releases/
+    when: folder_sum.stdout|int > 1
+  # 同步本地仓库到生产机器
+  - name: synchronize from local to remote
+    synchronize:
+      src: /tmp/{{app_name}}/
+      dest: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}
+      mode: push
+      delete: yes
+      rsync_opts:
+        - "--exclude=config.json"
+  # 列举出多余的文件夹
+  - name: more than max_release
+    shell: 
+      cmd: ls|sort -rn|tail -n +6
+      chdir: /srv/deploys/{{app_name}}/releases/
     register: files_to_delete
+    when: folder_sum.stdout|int > 5
+  # 删除多余release
   - name: "remove release folder"
     file:
       path: "/srv/deploys/{{app_name}}/releases/{{ item }}"
       state: absent
     with_items: "{{ files_to_delete.stdout_lines }}"
-  - name: shared link one # 创建软链接
+    when: folder_sum.stdout|int > 5
+  # 读取config.json内容
+  - name: setup config ansible 
+    include_vars:
+      dir: /tmp/{{app_name}}/
+      files_matching: config.json
+      name: contents
+  # 修改shared链接位置
+  - name: shared link one
     file: 
-      src: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/
-      dest: /srv/deploys/{{app_name}}/shared 
+      src: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}
+      dest: /srv/deploys/{{app_name}}/shared
       state: link
-  - name: shared link two # 创建软链接
-    file: 
-      src: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/
-      dest: /srv/apps/{{app_name}}
-      state: link
-  - name: deploy docker # 开始部署
-    shell: docker-compose -f /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/docker-compose.yaml up -d 
+  # 创建config.json的文件夹和链接
+  - name: mkdir dir
+    shell: 
+      cmd: mkdir {{item}} -p && if [ ! -h /srv/apps/{{app_name}}/current/{{item}} ];then ln -s /srv/deploys/{{app_name}}/shared/{{item}} /srv/apps/{{app_name}}/current/{{item}};fi
+      chdir: /srv/deploys/{{app_name}}/shared
+    with_items:
+      - "{{contents['dir']}}"
+    when: contents['dir']|length > 0
+  # 创建config.json的文件和链接
+  - name: touch file
+    shell: 
+      cmd: touch {{item}} && if [ ! -h /srv/apps/{{app_name}}/current/{{item}} ];then ln -s /srv/deploys/{{app_name}}/shared/{{item}} /srv/apps/{{app_name}}/current/{{item}};fi
+      chdir: /srv/deploys/{{app_name}}/shared
+    with_items:
+      - "{{contents['file']}}"
+    when: contents['file']|length > 0 
+  # 判断docker-compose.yaml是否存在
+  - name: check docker-compose.yaml is exists
+    stat:
+      path: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/docker-compose.yaml
+    register: result
+  # 判断是否需要部署
+  - name: deploy docker
+    shell: 
+      cmd: docker-compose -f /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}/docker-compose.yaml up -d 
+      chdir: /srv/deploys/{{app_name}}/releases/{{hashid.stdout}}
+    when: result.stat.exists == true
