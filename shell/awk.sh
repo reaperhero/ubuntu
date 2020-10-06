@@ -53,5 +53,3 @@ awk '{if($6<$7) print $1}' 				    # 列比较
 awk '{if(NR>10 && NR<20 ) print $1}'        # 多个条件
 awk '{if($(NF-4) < 1 && $7 !~ /dataapi/) print $7 " " $(NF-4) }' # 多个正则条件
 
-# sed
-sed -i '/git.mudu.tv/d' /etc/hosts  # 删除保护指定内容行

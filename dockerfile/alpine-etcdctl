@@ -1,0 +1,3 @@
+FROM alpine:3.12.0
+COPY etcdctl /usr/bin
+CMD [ "sh", "-c", "etcdctl --endpoints $ENDPOINTS --write-out=\"table\" endpoint status" ]

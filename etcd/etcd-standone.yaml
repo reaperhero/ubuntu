@@ -1,0 +1,7 @@
+version: '3'
+services:
+  etcd:
+    image: bitnami/etcd:3.4.13
+    container_name: etcd01
+    ports:
+      - 2379:2379
