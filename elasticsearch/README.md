@@ -16,3 +16,4 @@ curl -s "http://{ESIP}:9200/_cat/shards" | grep UNASSIGNED
 curl -X GET 192.168.1.52:9200/_cat/indices?v |awk '/2020.07/{print " curl -XDELETE 192.168.1.52:9200/"$3}' > 1.sh 
 chmod +x clean.sh && ./clean.sh && rm -fr clean
 ```
+

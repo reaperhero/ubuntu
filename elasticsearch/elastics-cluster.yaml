@@ -14,6 +14,8 @@ services:
       - discovery.seed_hosts=172.16.200.76,172.16.137.118,172.16.137.119
       - cluster.initial_master_nodes=172.16.200.76,172.16.137.118,172.16.137.119
       - bootstrap.memory_lock=true
+      - indices.query.bool.max_clause_count=8192
+      - search.max_buckets=250000
       - "ES_JAVA_OPTS=-Xms12g -Xmx12g"
     ulimits:
       memlock:
@@ -43,6 +45,8 @@ services:
       - http.cors.allow-origin="*"
       - discovery.seed_hosts=172.16.200.76,172.16.137.118,172.16.137.119
       - cluster.initial_master_nodes=172.16.200.76,172.16.137.118,172.16.137.119
+      - indices.query.bool.max_clause_count=8192
+      - search.max_buckets=250000
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms3g -Xmx3g"
     ulimits:
@@ -73,6 +77,8 @@ services:
       - discovery.seed_hosts=172.16.200.76,172.16.137.118,172.16.137.119
       - cluster.initial_master_nodes=172.16.200.76,172.16.137.118,172.16.137.119
       - bootstrap.memory_lock=true
+      - indices.query.bool.max_clause_count=8192
+      - search.max_buckets=250000
       - "ES_JAVA_OPTS=-Xms3g -Xmx3g"
     ulimits:
       memlock:

@@ -5,6 +5,12 @@
 - mod 
 
 ```
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+```
+
+- noproxy
+```
 export GOPRIVATE=git.mudu.tv 
 go get golang.org/x/text@latest   # 拉取最新的版本(优先择取 tag)
 go get golang.org/x/text@master   # 拉取 master 分支的最新 commit

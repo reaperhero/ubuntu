@@ -33,12 +33,12 @@ true
 
 > db.mycol2.insert({"name" : "菜鸟教程"})  # 插入文档
 
-> db.col2.find() # 查询文档
+> db.mycol2.find() # 查询文档
 {"name" : "菜鸟教程"}
 
-> db.col2.update({'name':'菜鸟教程'},{$set:{'name':'MongoDB'}}) # 更新文档
+> db.mycol2.update({'name':'菜鸟教程'},{$set:{'name':'MongoDB'}}) # 更新文档
 
-> db.col.remove({'title':'MongoDB 教程'}) # 删除文档
+> db.mycol2.remove({'title':'MongoDB 教程'}) # 删除文档
 
 >db.mycol2.drop()  # 删除集合 mycol2
 true
