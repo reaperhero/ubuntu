@@ -29,5 +29,10 @@ arraytables=(drop_tbl mudutv-charge_inflow mudutv-charge_outflow mudutv-daily_ad
 
 for table in ${arraytables[@]};
 do
+<<<<<<< HEAD
     mysqldump --column-statistics=0 -h localhost -uroot -p123456 rank  ${table} >> /tmp/data.sql
 done
+=======
+    mysqldump --column-statistics=0 -h 127.0.0.1 -uroot -p123456 rank  ${table} >> /tmp/data.sql
+done
+>>>>>>> d931550b6a67157f81e7baa2f021135f5536b49c

@@ -1,0 +1,17 @@
+*filter
+:INPUT ACCEPT [224877:11895914]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [242516:8575163756]
+# 限制单个IP并发连接数 
+-A INPUT -p tcp -m tcp --dport 80:90 -m connlimit --connlimit-above 2 --connlimit-mask 32 --connlimit-saddr -j DROP
+-A INPUT -p tcp -m tcp --dport 22 -m connlimit --connlimit-above 3 --connlimit-mask 32 --connlimit-saddr -j DROP
+-A OUTPUT -p tcp -m tcp --dport 80:90 -m connlimit --connlimit-above 2 --connlimit-mask 32 --connlimit-saddr -j DROP
+-A OUTPUT -p tcp -m tcp --dport 22 -m connlimit --connlimit-above 3 --connlimit-mask 32 --connlimit-saddr -j DROP
+COMMIT
+*mangle
+:PREROUTING ACCEPT [588297:10066591578]
+:INPUT ACCEPT [588276:10066588066]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [501577:8589081735]
+:POSTROUTING ACCEPT [501577:8589081735]
+COMMIT

@@ -1,0 +1,28 @@
+# 限制80端口60秒内每个IP只能发起3个新连接,可防CC及非伪造IP的syn flood。
+
+*filter
+:INPUT ACCEPT [108:7304]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [69:8360]
+-A INPUT -p tcp -m tcp --dport 80 --tcp-flags FIN,SYN,RST,ACK SYN -m recent --rcheck --seconds 60 --hitcount 3 --name webpool --mask 255.255.255.255 --rsource -j LOG --log-prefix "DDOS:" --log-ip-options
+-A INPUT -p tcp -m tcp --dport 80 --tcp-flags FIN,SYN,RST,ACK SYN -m recent --rcheck --seconds 60 --hitcount 3 --name webpool --mask 255.255.255.255 --rsource -j DROP
+-A INPUT -p tcp -m tcp --dport 80 --tcp-flags FIN,SYN,RST,ACK SYN -m recent --set --name webpool --mask 255.255.255.255 --rsource -j ACCEPT
+COMMIT
+*mangle
+:PREROUTING ACCEPT [1205:88706]
+:INPUT ACCEPT [1205:88706]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [674:79754]
+:POSTROUTING ACCEPT [670:79514]
+COMMIT
+
+
+
+
+# 配置
+iptables -A INPUT -p tcp --dport 80 --syn -m recent --name webpool --rcheck --seconds 60 --hitcount 3 -j LOG --log-prefix 'DDOS:' --log-ip-options
+iptables -A INPUT -p tcp --dport 80 --syn -m recent --name webpool --rcheck --seconds 60 --hitcount 3 -j DROP
+iptables -A INPUT -p tcp --dport 80 --syn -m recent --name webpool --set -j ACCEPT
+# 查看限制
+root@ubuntu:/proc/net/xt_recent# cat /proc/net/xt_recent/webpool 
+src=192.168.3.61 ttl: 64 last_seen: 4296952816 oldest_pkt: 6 4296924981, 4296924990, 4296924996, 4296952812, 4296952815, 4296952816

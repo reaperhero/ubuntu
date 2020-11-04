@@ -1,0 +1,21 @@
+*filter
+:INPUT ACCEPT [182:12591]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [102:11883]
+# time format = UTC
+-A OUTPUT -p tcp -m multiport --dports 80,443 -m time --weekdays Sat,Sun --datestop 2038-01-19T03:14:07 -j REJECT --reject-with icmp-port-unreachable
+-A OUTPUT -p tcp -m tcp --dport 443 -m time --timestart 01:00:00 --timestop 09:00:00 --datestop 2038-01-19T03:14:07 -j REJECT
+-A OUTPUT -p tcp -m tcp --dport 80 -m time --timestart 01:00:00 --timestop 09:00:00 --datestop 2038-01-19T03:14:07 -j REJECT
+COMMIT
+*mangle
+:PREROUTING ACCEPT [1514:122196]
+:INPUT ACCEPT [1514:122196]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [891:100513]
+:POSTROUTING ACCEPT [881:99913]
+COMMIT
+
+#
+iptables -t filter -I OUTPUT -p tcp --dport 80 -m time --timestart 01:00:00 --timestop 06:00:00 -j ACCEPT
+iptables -t filter -I OUTPUT -p tcp --dport 443 -m time --timestart 01:00:00 --timestop 06:00:00 -j ACCEPT
+iptables -t filter -I OUTPUT -p tcp -m multiport --dports 80,443 -m time --weekdays 6,7 -j REJECT

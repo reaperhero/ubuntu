@@ -1,0 +1,24 @@
+*filter
+:INPUT ACCEPT [1573:83363]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [65:8188]
+# 源端口限速
+# 20/sec = 800k/s
+-A OUTPUT -p tcp -m tcp --sport 5201:5202 -m limit --limit 20/sec -j ACCEPT
+-A OUTPUT -p tcp -m tcp --sport 5201:5202 -j DROP
+-A OUTPUT -p tcp -m tcp --sport 80 -m limit --limit 20/sec -j ACCEPT
+-A OUTPUT -p tcp -m tcp --sport 80 -j DROP
+COMMIT
+*mangle
+:PREROUTING ACCEPT [689607:10071982599]
+:INPUT ACCEPT [689586:10071979087]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [627193:12748597052]
+:POSTROUTING ACCEPT [624678:12662039508]
+COMMIT
+
+
+
+# 测试
+# iperf3 -s  服务端
+# iperf3 -u -c 192.168.3.63  客户端
