@@ -1,0 +1,17 @@
+- hosts: hw
+  remote_user: root
+  tasks:
+    - name: copy docker.sh to remote
+      copy: src=/home/reaper/shell/ansible/zabbix/scripts/docker.sh dest=/etc/zabbix/scripts
+    - name: authkeys mode 700
+      file: path=/etc/zabbix/scripts/docker.sh mode=700
+    - name: copy kubernetes.sh to remote
+      copy: src=/home/reaper/shell/ansible/zabbix/scripts/kubernetes.sh dest=/etc/zabbix/scripts
+    - name: authkeys mode 700
+      file: path=/etc/zabbix/scripts/kubernetes.sh mode=700
+    - name: copy kubernetes.conf to remote
+      copy: src=/home/reaper/shell/ansible/zabbix/zabbix_agentd.d/kubernete.conf dest=/etc/zabbix/zabbix_agentd.d
+    - name: copy docker.conf to remote
+      copy: src=/home/reaper/shell/ansible/zabbix/zabbix_agentd.d/docker.conf dest=/etc/zabbix/zabbix_agentd.d
+    - name: restart zabbix
+      service: name=zabbix-agent.service state=restarted

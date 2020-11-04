@@ -35,3 +35,4 @@ while [ $count -lt 5 ]; do echo $count; ((count++)); done
 
 for i in `seq 10`; do curl -v http://baidu.com; done
 
+

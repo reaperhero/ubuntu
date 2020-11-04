@@ -1,6 +1,9 @@
 version: '3.7'
 services:
   consul:
-    image: consul
+    image: consul:1.4.4 
     ports:
       - "8500:8500"
+
+
+# docker run -d -p 8500:8500 -v /data/consul:/consul/data -e CONSUL_BIND_INTERFACE='eth0' --name=consul_server_1 consul:1.4.4 agent -server -bootstrap -ui -node=1 -client='0.0.0.0'

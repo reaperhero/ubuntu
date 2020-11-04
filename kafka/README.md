@@ -13,3 +13,4 @@ kafka/site-docs/kafka_2.11-0.11.0.3-site-docs.tgz    #Scala 的版本为2.11，k
 ```
 0.10.x broker配置弃用了advertised.host.name 和 advertised.port 这两个个配置项
 ```
+
