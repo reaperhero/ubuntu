@@ -7,10 +7,7 @@ git remote set-url origin https://github.com/test.git
 
 git remote set-url origin https://guest:password@github.com/test.git
 
-
 git branch --set-upstream-to=origin/master master
-
-
 ```
 
 

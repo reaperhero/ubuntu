@@ -14,5 +14,5 @@ receive
 
 ```
 cd  $GOPATH/src/github.com/nats-io/nats.go/examples/nats-sub
-go run main.go -s "nats://nats.default:4222" -t foo
+go run main.go -s "nats://nats.default:4222" -t foo          # 订阅
 ```

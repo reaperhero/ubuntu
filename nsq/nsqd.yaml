@@ -1,20 +1,20 @@
 version: '2'
 services:
   nsqadmin:
-    image: nsqio/nsq:latest
+    image: nsqio/nsq:v1.2.0
     ports:
       - "4171:4171/tcp"
     container_name: nsqadmin-01
-    command: [ "nsqadmin", "--lookupd-http-address=192.168.0.75:4161" ]
+    command: [ "nsqadmin", "--lookupd-http-address=192.168.40.32:4161" ]
   nsqd:
-    image: nsqio/nsq:latest
+    image: nsqio/nsq:v1.2.0
     ports:
       - "4150:4150/tcp"
       - "4151:4151/tcp"
     container_name: nsqd-01
-    command: [ "nsqd","--lookupd-tcp-address=192.168.0.75:4160","--broadcast-address=192.168.0.75" ]
+    command: [ "nsqd","--lookupd-tcp-address=192.168.40.32:4160","--broadcast-address=192.168.40.32" ]
   nsqlookupd:
-    image: nsqio/nsq:latest
+    image: nsqio/nsq:v1.2.0
     ports:
       - "4160:4160/tcp"
       - "4161:4161/tcp"
