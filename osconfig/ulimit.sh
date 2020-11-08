@@ -6,13 +6,6 @@ fs.file-nr = 19520(已使用)		1635082(最大)
 echo "fs.file-max=6553500" >>/etc/sysctl.conf 永久修改限制数
 
 
-
-
-
-
-
-
-
 # 用户级进程打开文件数限制
 
 root@mrtc:/proc/self# cat /proc/self/limits
