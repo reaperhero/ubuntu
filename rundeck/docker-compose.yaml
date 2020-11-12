@@ -1,0 +1,11 @@
+version: '3'
+services:
+    rundeck:
+        image: jordan/rundeck:3.3.5
+        environment:
+            EXTERNAL_SERVER_URL: http://rundeck.mudu.tv
+            RUNDECK_ADMIN_PASSWORD: 0m3soOkb4tZHLxYj
+            RUNDECK_USER: rundeck
+            RUNDECK_PASSWORD: j2thEWJKvqMNOgGQ
+        ports:
+          - 80:4440
