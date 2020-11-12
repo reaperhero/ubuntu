@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  apollo-portal:
+    image: apolloconfig/apollo-portal:1.7.1
+    container_name: apollo-portal
+    restart: always
+    environment: 
+      SPRING_DATASOURCE_URL: jdbc:mysql://192.168.50.146:3306/Apdb?characterEncoding=utf8
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 123456
+      SERVER_PORT: 8070
+      APOLLO_PORTAL_ENVS: dev
+      DEV_META: "http://192.168.40.253:8080"
+    depends_on:
+      - apollo-adminservice
+    ports: 
+      - 8070:8070
+    volumes: 
+      - ./portal/logs:/opt/logs 
+  apollo-configservice:
+    image: apolloconfig/apollo-configservice:1.7.1
+    container_name: apollo-configservice
+    restart: always
+    environment: 
+      SPRING_DATASOURCE_URL: jdbc:mysql://192.168.50.146:3306/Acdb?characterEncoding=utf8
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 123456
+      SERVER_PORT: 8080
+    ports: 
+      - 8080:8080
+    volumes: 
+      - ./configservice/logs:/opt/logs
+  apollo-adminservice:
+    image: apolloconfig/apollo-adminservice:1.7.1
+    container_name: apollo-adminservice
+    restart: always
+    depends_on:
+      - apollo-configservice
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://192.168.50.146:3306/Acdb?characterEncoding=utf8
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 123456
+      SERVER_PORT: 8090
+    ports: 
+      - 8090:8090
+    volumes: 
+      - ./adminservice/logs:/opt/logs

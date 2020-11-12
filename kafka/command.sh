@@ -16,7 +16,7 @@ kafka-topics.sh --zookeeper localhost:2181 --delete --topic topic_name-01   删�
 kafka-topics.sh --zookeeper localhost:2181 --describe   主题描述(全部）
 kafka-topics.sh --zookeeper localhost:2181 --describe --topic topic-name-01主题描述(指定）
 kafka-topics.sh --zookeeper localhost:2181 --alter --topic topic_name --partitions count   修改主题
-kafka-console-producer.sh --broker-list localhost:9092 --topic topic-name-01 发送消费
+kafka-console-producer.sh --bootstrap-server localhost:9092 --topic topic-name-01  # 发送消息, --broker-list
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic-name-01 --from-beginning 消费消息
 
 
