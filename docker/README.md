@@ -1,102 +1,29 @@
-# network
+# docker
 
-默认的网络是不支持指派固定IP的,不同网络之间网络是隔离的
+- 日志限制
 
-- 创建网络
+docker
 ```
-docker network create \
-  --driver=bridge \
-  --subnet=172.28.0.0/16 \
-  --ip-range=172.28.5.0/24 \
-  --gateway=172.28.5.1 \
-  ecdn
+docker run --log-opt max-size=10m --log-opt max-file=3 
 ```
-
-
-- 使用已有网络网络
+docker-compose
 ```
-version: '2'
+version: '3'
 services:
-  e1:
+  redis:
+    image: redis:5.0
     restart: always
-    image: ubuntu:16.04
-    container_name: e1
-    tty: true
-    networks:
-      network-ecdn:
-        ipv4_address: 172.28.5.90
-  e2:
-    restart: always
-    image: ubuntu:16.04
-    container_name: e2
-    tty: true
-    networks:
-      network-ecdn:
-        ipv4_address: 172.28.5.50
-
-networks:
-  network-ecdn:
-    external:
-      name: ecdn
-```
-
-- 新创建网络
-
-```
-version: '2'
-services:
-  ubuntu:
-    restart: always
-    image: ubuntu:16.04
-    container_name: ecdn
-    tty: true
-    networks:
-      ecdn:
-        ipv4_address: 172.19.0.101
-  switch:
-    restart: always
-    image: ubuntu:16.04
-    container_name: stream-switch
-    tty: true
-    networks:
-      ecdn:
-        ipv4_address: 172.19.0.100
+    container_name: IP20-redis-6378
+    environment:
+    - TZ=Asia/Shanghai
+    ports:
+    - 6378:6378
     volumes:
-      - /data/stream-switch:/data
-
-networks:
-  ecdn:
-    driver: bridge
-    ipam:
-      config:
-      - subnet: 172.19.0.0/16
-        gateway: 172.19.0.1
-```
-
-- container网络
-
-```
-version: '2'
-services:
-  e5:
-    restart: always
-    image: ubuntu:16.04
-    container_name: e5
-    tty: true
-    networks:
-      network-ecdn:
-        ipv4_address: 172.28.5.95
-  e6:
-    restart: always
-    image: ubuntu:16.04
-    container_name: e6
-    depends_on:
-      - e5
-    tty: true
-    network_mode: "service:e5"
-
-networks:
-  network-ecdn:
-    external:
-      name: ecdn
+    - ./redis.conf:/etc/redis/redis.conf
+    command: redis-server /etc/redis/redis.conf
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
 ```
