@@ -1,4 +1,4 @@
-# vm.max_map_count = 262144 >> /etc/sysctl.conf
+# echo "vm.max_map_count = 262144" >> /etc/sysctl.conf
 version: '3'
 services:
   es01:

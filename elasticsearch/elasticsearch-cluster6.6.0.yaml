@@ -1,3 +1,4 @@
+# chown -R 777 /data /logs
 version: '3'
 services:
   elasticsearch_n0:

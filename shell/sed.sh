@@ -7,3 +7,4 @@ sed -i "24s/^/#/g" conf/application.conf  # 注释第24行
 
 sed -i 's/.//'  file                    # 删除每行第一个字符。
 
+sed -i "45,77s/^/#/g" nginx-configmap.yaml  # 45行到77行，行首添加注释符#   
