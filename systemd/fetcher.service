@@ -1,0 +1,17 @@
+[Unit]
+Description=Fetcher Server
+After=network.target
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/fetcher/server/tv.mudu.fetcher/dist
+ExecStart=/root/fetcher/server/tv.mudu.fetcher/dist/FetcherService.linux
+Restart=always
+LimitNOFILE=65536
+RestartSec=60
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target
