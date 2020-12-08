@@ -32,6 +32,7 @@ IP匹配
 
 ## 端口转发
 
+```
 iptables -t nat -A PREROUTING -p tcp --dport [要转发的端口号] -j DNAT --to-destination [要转发的服务器IP]
 iptables -t nat -A PREROUTING -p udp --dport [要转发的端口号] -j DNAT --to-destination [要转发的服务器IP]
 iptables -t nat -A POSTROUTING -p tcp -d [要转发的服务器IP] --dport [要转发的端口号] -j SNAT --to-source [本机IP]
@@ -41,3 +42,4 @@ iptables -t nat -A PREROUTING -p tcp --dport [要转发的端口段] -j DNAT --t
 iptables -t nat -A PREROUTING -p udp --dport [要转发的端口段] -j DNAT --to-destination [要转发的服务器IP]
 iptables -t nat -A POSTROUTING -p tcp -d [要转发的服务器IP] --dport [要转发的端口段] -j SNAT --to-source [本机IP]
 iptables -t nat -A POSTROUTING -p udp -d [要转发的服务器IP] --dport [要转发的端口段] -j SNAT --to-source [本机IP]
+```
