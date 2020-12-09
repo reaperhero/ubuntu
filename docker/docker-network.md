@@ -14,6 +14,8 @@ docker network create \
 
 
 - 使用已有网络网络
+
+
 ```
 version: '2'
 services:
@@ -34,11 +36,19 @@ services:
       network-ecdn:
         ipv4_address: 172.28.5.50
 
+# 第一种
 networks:
   network-ecdn:
     external:
       name: ecdn
+
+# 第二种，上面可以不用写networks
+networks:
+  default:
+    external:
+      name: ecdn
 ```
+
 
 - 新创建网络
 
