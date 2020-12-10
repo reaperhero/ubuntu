@@ -1,9 +1,72 @@
-version: "3"
-
+version: '2'
 services:
-  webapp:
-    image: examples/web
+  web:
+    image: dockercloud/hello-world
+    entrypoint: /bin/sh
+    command: -c "ps $$(echo $$$$)"
+    restart: always
+    container_name: redis-01
+    dns: 8.8.8.8
+    tty: true
+    privileged: true
+    extra_hosts:
+      - "somehost:162.242.195.82"
+      - "otherhost:50.31.209.229"
+    depends_on:
+      - db
+      - redis
     ports:
-      - "80:80"
+      - 8080
+    networks:
+      - front-tier
+      - back-tier
+    build:
+      context: ../
+      dockerfile: path/of/Dockerfile
+      args:
+        - buildno=1
+        - password=secret
+
+  redis:
+    image: redis
+    restart: always
+    working_dir: /code
+    entrypoint:
+      - php
+      - -d
+      - zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525/xdebug.so
+      - -d
+      - memory_limit=-1
+      - vendor/bin/phpunit
+    container_name: redis-01
+    network_mode: "host"
+    environment:
+      RACK_ENV: development
+      SHOW: 'true'
+      SESSION_SECRET:
+    tty: true
+    links:
+      - web
+    networks:
+      - back-tier
+
+  lb:
+    image: dockercloud/haproxy
+    restart: always
+    container_name: redis-01
+    tty: true
+    ports:
+      - 80:80
+    links:
+      - web
+    networks:
+      - front-tier
+      - back-tier
     volumes:
-      - "/data"
+      - /var/run/docker.sock:/var/run/docker.sock 
+
+networks:
+  front-tier:
+    driver: bridge
+  back-tier:
+driver: bridge
