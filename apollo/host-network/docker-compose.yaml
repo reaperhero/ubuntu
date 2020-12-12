@@ -40,5 +40,5 @@ services:
       SPRING_DATASOURCE_PASSWORD: bgau1275vzasd
       SERVER_PORT: 8090
     network_mode: host
-    volumes: 
+    volumes:
       - ./adminservice/logs:/opt/logs
