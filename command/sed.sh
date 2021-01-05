@@ -10,4 +10,4 @@ sed -i 's/.//'  file                        # 删除每行第一个字符。
 sed -i "45,77s/^/#/g" nginx-configmap.yaml  # 45行到77行，行首添加注释符#   
 
 
-find . -name "*.htm" | xargs sed -i -e "s%somebody%donal%g"   # 批量替换
+find . -name "*.htm" | xargs sed -i -e "s%somebody%donal%g"   # 递归批量替换
