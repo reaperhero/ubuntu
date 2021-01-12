@@ -5,3 +5,5 @@
   "registry-mirrors": ["https://mirror.ccs.tencentyun.com"],
   "insecure-registries" : ["myregistrydomain.com:5000"]
 }
+
+
