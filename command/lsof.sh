@@ -4,6 +4,10 @@ lsof -u username    # 列出某个用户打开的文件信息
 lsof -c mysql       # 列出某个程序进程所打开的文件信息  
 
 
+lsof -n|awk '{print $2}'| sort | uniq -c | sort -nr | head # 查询每个进程的文件描述符
+
+
+
 > lsof -c mysql  # -c 匹配COMMAND开头信息
 COMMAND   PID    USER   FD   TYPE DEVICE   SIZE/OFF       NODE NAME
 mysqld  17079 polkitd  cwd    DIR  253,1       4096    2361151 /var/lib/mysql
