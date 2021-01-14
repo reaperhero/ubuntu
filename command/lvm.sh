@@ -24,17 +24,16 @@ lvextend -L +4GB /dev/vgdata/lvdata1
 resize2fs /dev/vgdata/lvdata1
 xfs_growfs /dev/elastic/lvol0
 
-
+# 单个磁盘
 pvcreate /dev/vde
 vgextend minio /dev/vde
 lvextend -l +100%FREE  /dev/minio/minio
 resize2fs /dev/mapper/minio-minio
 
-
-
-# 创建/dev/sdb3 lvm分区
+# 单个分区
 fdisk /dev/sdb --> 按p 创建主分区 -> 按t选择分区，输入8e  修改分区为lvm分区
 partprobe /dev/sdb  # 设置磁盘支持分区lvm
 pvcreate  /dev/sdb3
 vgextend sysvg /dev/sdb3
 lvextend -l +100%FREE  /dev/sysvg/lv_root
+resize2fs /dev/sysvg/lv_root

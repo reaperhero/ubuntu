@@ -17,3 +17,35 @@ curl -X GET 192.168.1.52:9200/_cat/indices?v |awk '/2020.07/{print " curl -XDELE
 chmod +x clean.sh && ./clean.sh && rm -fr clean
 ```
 
+
+
+## 增删改查
+
+- 增
+
+创建索引
+```
+curl -X PUT localhost:9200/bookdb_index 
+```
+
+- 删
+
+删除索引
+```
+curl -X DELETE  localhost:9200/bookdb_index 
+```
+- 查
+
+请求参数方式
+```
+curl 'localhost:9200/bank/_search?q=*&pretty'
+```
+
+请求体方式
+
+```
+curl -XPOST 'localhost:9200/bank/_search?pretty' -d '
+{
+  "query": { "match_all": {} }
+}'
+```
