@@ -27,3 +27,13 @@ services:
         max-size: "100m"
         max-file: "3"
 ```
+
+
+
+
+
+- ENTRYPOINT
+
+```
+docker run --entrypoint "echo" --rm -it ubuntu:16.04 hello
+```
