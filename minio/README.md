@@ -23,7 +23,7 @@ version  输出版本信息。
 
 ## mc安装
 ```
-wget https://198dev.obs.cn-east-2.myhuaweicloud.com/muduops/tools/mc
+wget https://dl.min.io/client/mc/release/linux-amd64/mc
 mv mc /usr/bin/
 chmod +x /usr/bin/mc
 ```
