@@ -3,9 +3,9 @@ services:
   rundeck:
     image: jordan/rundeck:3.3.5
     environment:
-      EXTERNAL_SERVER_URL: http://rundeck.mudu.tv
-      RUNDECK_ADMIN_PASSWORD: 0m3soOkb4tZHLxYj
+      EXTERNAL_SERVER_URL: http://chenqiangjun.com
+      RUNDECK_ADMIN_PASSWORD: admin123
       RUNDECK_USER: rundeck
-      RUNDECK_PASSWORD: j2thEWJKvqMNOgGQ
+      RUNDECK_PASSWORD: admin123
     ports:
       - 80:4440
