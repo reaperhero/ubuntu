@@ -31,7 +31,7 @@ chmod +x /usr/bin/mc
 ## host管理
 
 ```
-mc config host add miniohz http://192.168.1.51 BKIKJAA5BMMU2RHO6IBB V7f1CwQqAcwo80UEIJEjc5gVQUSSx5ohQ9GSrr12 --api s3v4 添加服务端
+mc config host add miniohz http://192.168.1.51 BKIKJAA5BMMU2RHO6IBB V8f1CwQqAcwo80UEIJEjc5gVQUSSx5ohQ9GSrr12 --api s3v4 添加服务端
 mc config host ls # 列出服务端
 mc config host remove miniohz # 删除服务端
 ```
@@ -39,7 +39,8 @@ mc config host remove miniohz # 删除服务端
 ## bucket管理
 
 ```
-mc ls shlt              #列出服务端bucket
+mc ls play              #列出哪些桶
+mc ls shlt              #列出指定桶
 mc mb shlt/myun-storage #创建bucket
 ```
 
