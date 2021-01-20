@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER chenqiangjun "chenqiangjun@mudu.tv"
+MAINTAINER chenqiangjun "chenqiangjun@163.com"
 
 ENV HOME /root
 ENV USER root
@@ -33,7 +33,7 @@ RUN yarn config set registry https://registry.npm.taobao.org/
 
 RUN mkdir /root/.ssh/ -p && \
     echo $SSH_KEY | base64 --decode > /root/.ssh/id_rsa && \
-    ssh-keyscan git.mudu.tv >> /root/.ssh/known_hosts && \
+    ssh-keyscan git.163.com >> /root/.ssh/known_hosts && \
     chmod -R 600 /root/.ssh && \
     echo "Asia/Shanghai" > /etc/timezone
 
@@ -47,15 +47,9 @@ RUN sed -i "s/;date.timezone =.*/date.timezone = Asia\/Shanghai/" /etc/php/7.1/f
     sed -i "s/;opcache.fast_shutdown=.*/opcache.fast_shutdown=1/" /etc/php/7.1/fpm/php.ini && \
     sed -i "s/upload_max_filesize\s*=\s*.*/upload_max_filesize = 200M/" /etc/php/7.1/fpm/php.ini
 
-
-
-RUN echo "${GitHost}" >> /etc/hosts && \
-    git clone git@git.mudu.tv:dev-public/mudutv_web.git  /var/www/mudutv/ && \
-    git clone git@git.mudu.tv:back-end/mudutv_web_golang.git /root/mudutv_web_golang
-
 RUN echo `grep -v ${GitHost} /etc/hosts` > /etc/hosts
 
-RUN echo 'cd /var/www/mudutv/  \n\
+RUN echo 'cd /var/www/baidu/  \n\
     git fetch \n\
     git reset --hard \n\
     git clean -n \n\
@@ -67,4 +61,4 @@ RUN echo 'cd /var/www/mudutv/  \n\
     > /start.sh
 
 RUN chmod +x /start.sh
-# docker build -t registry.cn-hangzhou.aliyuncs.com/mudu/mudutv-web:20200526  --build-arg GitHost='10.26.38.62 git.mudu.tv' .
+# docker build -t web:20200526  --build-arg GitHost='10.26.38.62 git.163.com' .

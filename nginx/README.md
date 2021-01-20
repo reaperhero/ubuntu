@@ -75,7 +75,7 @@ server {
 
         limit_req zone=mylimit burst=4 nodelay;
        # limit_req_status 402;
-    root /var/www/mudutv;
+    root /var/www/baidu;
 
     index index.html;
 

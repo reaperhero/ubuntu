@@ -10,7 +10,7 @@ services:
       - /data/atlassian/mysql:/var/lib/mysql
     container_name: atlassian_mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "ay7321ba(sds"
+      MYSQL_ROOT_PASSWORD: "密码"
       TZ: "Asia/Shanghai"
   jira:
     image:  cptactionhank/atlassian-jira-software:8.1.0
