@@ -1,5 +1,5 @@
 #!/bin/bash
-# https://myun-static.obs.cn-north-1.myhuaweicloud.com/muduops/Python-3.7.2.tgz
+# https://myun-static.obs.cn-north-1.myhuaweicloud.com/baiduops/Python-3.7.2.tgz
 # 
 # 依赖安装
 # ubuntu14.04

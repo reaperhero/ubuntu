@@ -6,8 +6,8 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/root/fetcher/server/tv.mudu.fetcher/dist
-ExecStart=/root/fetcher/server/tv.mudu.fetcher/dist/FetcherService.linux
+WorkingDirectory=/data/bin/
+ExecStart=server.linux
 Restart=always
 LimitNOFILE=65536
 RestartSec=60
