@@ -1,5 +1,4 @@
 #!/bin/bash
-# https://myun-static.obs.cn-north-1.myhuaweicloud.com/baiduops/Python-3.7.2.tgz
 # ubuntu14.04
 # apt-get install openssl libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev -y
 # https://www.jianshu.com/p/f8585da77ed9
