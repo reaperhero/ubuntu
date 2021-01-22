@@ -41,7 +41,7 @@ mc config host remove miniohz # 删除服务端
 ```
 mc ls play              #列出哪些桶
 mc ls shlt              #列出指定桶
-mc mb shlt/myun-storage #创建bucket
+mc mb shlt/myun-storage #创建bucket或目录
 ```
 
 ## 文件管理
