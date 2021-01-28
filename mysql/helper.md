@@ -11,6 +11,10 @@ FLUSH PRIVILEGES;
 
 批量替换
 update 表名 set 字段1 = replace(字段1,'c','C'); 
+
+
+查询用户权限
+select * from mysql.user;
 ```
 
 
