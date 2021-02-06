@@ -37,3 +37,16 @@ services:
 ```
 docker run --entrypoint "echo" --rm -it ubuntu:16.04 hello
 ```
+
+
+
+
+- ADD COPY
+
+```
+如果目标路径最后跟 “/“ 符号，那么就代表目录，否则就是文件。如果目标目录不存在，那么会新建这个目录
+COPY cmd app/  把cmd目录下的东西copy到app下，app目录不存在会创建
+COPY cmd app   把cmd目录下的东西copy到app下，app目录不存在会创建
+COPY main.go README.md app/  复制文件到目标目录下，必须要有/
+COPY main.go app  复制文件，并重命名
+```
