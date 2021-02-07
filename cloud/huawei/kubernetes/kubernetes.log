@@ -1,0 +1,4 @@
+ tail -f  /var/paas/sys/log/canal/canal-agent.log
+
+
+ /var/paas/kubernetes/canal/openvswitch
