@@ -15,7 +15,8 @@ git branch --set-upstream-to=origin/master master
 ### git全局配置
 
 ```
-git config --global url."https://guest:password@github.com/".insteadOf "https://github.com/" 
+git config --global url."https://guest:password@github.com/".insteadOf "https://github.com/"  # git config --global --edit 可以删除新增
+
 ```
 
 
