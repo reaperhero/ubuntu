@@ -37,3 +37,11 @@ pvcreate  /dev/sdb3
 vgextend sysvg /dev/sdb3
 lvextend -l +100%FREE  /dev/sysvg/lv_root
 resize2fs /dev/sysvg/lv_root
+
+
+# 缩容
+umount /data
+fsck -f /dev/sysvg/data         # 检测逻辑卷
+resize2fs /dev/sysvg/data 20G   # 重置为20G
+lvreduce -L 20G /dev/sysvg/data # 重置为20G，其他的归还给sysvg
+mount -a                        # 重新挂载
