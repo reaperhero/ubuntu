@@ -11,3 +11,8 @@ sed -i "45,77s/^/#/g" nginx-configmap.yaml  # 45行到77行，行首添加注释
 
 
 find . -name "*.htm" | xargs sed -i -e "s%somebody%donal%g"   # 递归批量替换
+
+sed -i 'Nd' filename   # 删除第N行
+
+sed -i 'M,Nd' filename # 删除第M到N行：
+
