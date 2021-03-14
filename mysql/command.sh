@@ -36,3 +36,31 @@ SHOW OPEN TABLES; 列举在表缓存中当前被打开的非TEMPORARY表。
 SHOW TRIGGERS; 列出了目前被MySQL服务器定义的触发程序
 show binary logs;
 ```
+
+- 修改密码
+
+MySQL 5.7.6版本以下
+```
+USE mysql;
+
+UPDATE user 
+SET authentication_string = PASSWORD('newpasswd')
+WHERE user = 'dbadmin' AND 
+      host = 'localhost';
+
+FLUSH PRIVILEGES;
+```
+
+MySQL 5.7.6+版本以上
+```
+USE mysql;
+
+UPDATE user 
+SET authentication_string = PASSWORD('newpasswd')
+WHERE user = 'dbadmin' AND 
+      host = 'localhost';
+
+FLUSH PRIVILEGES;
+```
+
+
