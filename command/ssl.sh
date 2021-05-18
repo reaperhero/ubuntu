@@ -6,4 +6,4 @@ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.pem
 
 
 # 检查证书有效期
- openssl x509 -in server.pem -noout -dates
+openssl x509 -in server.pem -noout -dates
