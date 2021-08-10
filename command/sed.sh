@@ -29,3 +29,5 @@ sed -i '3s/aaa/fff/' file      # 表示针对file文件中的第三行，�
 sed -i '/xxx/s/aaa/fff/g' file # 表示针对文件，找出包含xxx的行，并将其中的aaa替换为fff
 
 sed -i '1s/[#*]/fff/gp' file   # 表示针对文件第1行，将其中的#号或是*号替换为fff
+
+sed -i "88 r b.txt" a.txt   # 在a.txt的88行下插入b.txt文件内容
