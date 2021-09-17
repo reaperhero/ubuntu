@@ -1,0 +1,12 @@
+version: '3'
+services:
+  nacos:
+    image: nacos/nacos-server
+    restart: always
+    ports:
+      - "8848:8848/tcp"
+    environment:
+      NACOS_SERVER_IP: "10.20.13.14"
+      MODE: "standalone"
+
+# /nacos/  nacos nacos
