@@ -93,3 +93,6 @@ curl -XDELETE localhost:9200/_all 删除所有索引
 
 curl -X GET "localhost:9200/_cluster/stats?human&pretty"
 ```
+
+
+
