@@ -22,26 +22,53 @@ info keyspace  查看数据库db相关的统计信息
 
 
 - string
+
+[string](https://www.runoob.com/redis/redis-keys.html)
 ```
 redis 127.0.0.1:6379> SET runoob "菜鸟教程"
 OK
 redis 127.0.0.1:6379> GET runoob
 "菜鸟教程"
+redis 127.0.0.1:6379> DEL runoob
+(integer) 1
+redis 127.0.0.1:6379> EXISTS runoob
+(integer) 1
+redis 127.0.0.1:6379> SET runooobkey redis
+OK
+redis 127.0.0.1:6379> EXPIRE runooobkey 60
+(integer) 1
+redis> PERSIST runooobkey    # 删除EXPIRE命令
+(integer) 1
+redis 127.0.0.1:6379> KEYS runoob*
+1) "runooobkey"
 ```
 
 - hash
+类似map [hash](https://www.runoob.com/redis/redis-hashes.html)
 ```
 redis 127.0.0.1:6379> HMSET runoob field1 "Hello" field2 "World"
 redis 127.0.0.1:6379> HGET runoob field1
 "Hello"
-redis 127.0.0.1:6379> HGETALL runoob 
-"10"
-"Hello"
-"29"
-"World"
+redis 127.0.0.1:6379> HKEYS runoob
+1) "field1"
+2) "field2"
+redis 127.0.0.1:6379> HVALS myhash
+1) "Hello"
+2) "World"
+redis 127.0.0.1:6379> HEXISTS runoob field1
+(integer) 1
+redis 127.0.0.1:6379> HDEL runoob field1
+(integer) 1
+
+redis> HSET mykey field 10.50
+(integer) 1
+redis> HINCRBYFLOAT mykey field 0.1
+"10.6"
 ```
 
 - list
+
+类似链表
 ```
 redis 127.0.0.1:6379> lpush runoob redis
 redis 127.0.0.1:6379> lpush runoob mongodb

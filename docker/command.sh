@@ -3,6 +3,11 @@
 
 
 ```
+docker rm `docker ps -q -f status=exited`
+docker rmi -f `docker images | awk '{print $3}'`
+docker run --volumes-from dbdata -v ${pwd}:/backup --name worker ubuntu tar cvf /baskup/baukup.tar /dbdata
+
+
 docker build . --no-cache -t helloworld:v0.1
 docker ps  --no-trunc
 
