@@ -64,3 +64,83 @@ FLUSH PRIVILEGES;
 ```
 
 
+
+
+mysql锁问题
+```
+show global variables like 'innodb_lock_w%';   等待 50 秒后报Lock wait timeout exceeded
+select concat('KILL ',id,';') from information_schema.processlist where INFO like '%monitor_task_id%';  指定类型会话kill
+select * from information_schema.innodb_trx;  查看有是哪些事务占据了表资源
+SELECT * FROM information_schema.innodb_trx;  事务表
+SELECT * FROM information_schema.innodb_locks;  锁表
+SELECT * FROM information_schema.innodb_lock_waits; 锁等待的对应关系
+select * from sys.innodb_lock_waits\G;
+```
+
+
+死锁解决思路
+```
+1、show engine innodb status \G;  显示最后的一次死锁
+2、SELECT * FROM information_schema.innodb_trx\G;  根据死锁事物查询sql
+```
+
+```
+select * from information_schema.processlist where Host like  '%192.168.10.10%'\G;
+kill 209876
+```
+
+备份恢复
+```
+mysqldump -h 192.168.1.10 -uroot -p123456 -B finance rank > 1.sql  备份多个库
+mysql -h 192.168.1.10 -P3306 -uroot -p123456 -e 'show databases;' 2>/dev/null|grep -E -v "Database|information_schema|mysql|performance_schema"
+mysqldump -h 192.168.1.10 -uroot -p123456 -A >/backup/full.sql备份全库
+mysql -h 192.168.1.10 -uroot -p123456 < full.sql   恢复
+
+mysqldump -h 192.168.1.10 --opt -d internal_training -umix -p123456  --ignore-table=internal_training.admin_access --ignore-table=internal_training.admin_access_type --ignore-table=internal_training.phinxlog --ignore-table=internal_training.permission --ignore-table=internal_training.permission_group --ignore-table=internal_training.env_config --ignore-table=internal_training.env_config_type > init.sql 只导表结构
+```
+
+show open tables使用教程
+```
+show open tables from db_name; 过滤库
+show open tables like '%table_name%';  过滤表
+
+```
+
+主机连接分组
+```
+SELECT substring_index(host, ':',1) AS host_name,state,count(*) FROM information_schema.processlist GROUP BY state,host_name;
+```
+
+
+单表备份恢复
+```
+mysqldump -h 192.168.1.10 -uroot -p123456 db_name table_name >table_name.sql
+mysql -h 192.168.1.10 -uroot -p123456 db_name <table_name.sql
+```
+
+单表指定条件备份
+```
+SELECT COUNT(*) TABLES, table_schema FROM information_schema.TABLES  WHERE table_schema ='db_name';查询库下有多少表
+```
+
+指定数据库中的数据表大小
+```
+SELECT TABLE_NAME,DATA_LENGTH+INDEX_LENGTH,TABLE_ROWS,concat(round((DATA_LENGTH+INDEX_LENGTH)/1024/1024,2), 'MB') as data FROM information_schema.TABLES WHERE TABLE_SCHEMA='live_broadcast';
+```
+
+参数
+```
+key_buffer_size=32M   MyISAM表索引缓冲区的大小
+query_cache_size  查询缓存大小,query_cache_type=ON才生效
+tmp_table_size  临时表大小
+innodb_buffer_pool_size  缓存innodb表的索引，数据，插入数据时的缓冲
+max_connections 最大连接数
+sort_buffer_size 会话首次分配缓冲大小
+参数查询
+SHOW VARIABLES LIKE '%innodb_lock_wait%';  锁等待超时时间
+参数修改
+SET GLOBAL innodb_lock_wait_timeout=50;
+
+
+SET SQL_SAFE_UPDATES = 0;
+```

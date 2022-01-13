@@ -128,3 +128,5 @@ echo "net.ipv4.tcp_syncookies=1"  >> /etc/sysctl.conf             # 记录客户
 echo "tcp_synack_retries=3" >> /etc/sysctl.conf
 echo "net.core.somaxconn = 2048" >> /etc/sysctl.conf
 ```
+
+
