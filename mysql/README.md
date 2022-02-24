@@ -15,6 +15,13 @@ sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION";
 ```
 
 
+- 连接数
+
+```
+show variables like '%max_connection%'; 查看最大连接数
+set global max_connections=1000;        重新设置最大连接数  or 在/etc/my.cnf [mysqld] max_connections = 1000
+show full processlist;                  当前连接数
+```
 
 ## 索引
 
