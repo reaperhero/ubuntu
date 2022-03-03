@@ -144,3 +144,26 @@ SET GLOBAL innodb_lock_wait_timeout=50;
 
 SET SQL_SAFE_UPDATES = 0;
 ```
+
+- 慢日志
+
+```
+show variables like 'slow_query%';
+show variables like 'long_query_time';
+show variables like 'slow_query_log_file';
+show variables like '%log_output%';
+
+set global log_output='TABLE';   or FILE
+set global slow_query_log='ON'; 
+set global long_query_time=3;   // 要重连才能看见
+
+SELECT start_time,
+       user_host,
+       query_time,
+       lock_time,
+       rows_sent,
+       rows_examined,
+       db,
+       CONVERT(sql_text USING utf8)
+FROM mysql.slow_log order by start_time desc
+```
