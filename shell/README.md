@@ -13,6 +13,7 @@
 - 颜色变量
 
 <p>echo -e "${RED_PREFIX}service:5 was killed ${COLOR_SUFFIX}"<p>
+
 ```
 COLOR_SUFFIX="\033[0m"
 BLACK_PREFIX="\033[30m"
