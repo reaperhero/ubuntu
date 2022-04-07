@@ -167,3 +167,17 @@ SELECT start_time,
        CONVERT(sql_text USING utf8)
 FROM mysql.slow_log order by start_time desc
 ```
+
+- 查看表注释
+
+```
+SELECT
+table_name 表名,
+table_comment 表说明
+FROM
+information_schema.TABLES
+WHERE
+table_schema = '数据库名'
+ORDER BY
+table_name
+``` 

@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  ch_server:  # 自定义名称 clickhouse server
+    image: yandex/clickhouse-server
+    ports:
+      - "8123:8123"  # 映射端口
+    volumes:
+      - ./db:/var/lib/clickhouse  # 目录挂载, 将docker中的目录挂载到当前文件夹的db目录下
+    networks:
+      - ch_ntw  # 指定网络环境
+
+  ch_client:  # 自定义名称  clickhouse client
+    image: yandex/clickhouse-client
+    entrypoint:
+      - /bin/sleep
+    command:
+      - infinity
+    networks:
+      - ch_ntw
+  
+  ch_tabix:  # 这一段 可有可先, 用于安装web端 可以连接clickhouse数据库, 类似于 phpmyadmin 连接 mysql
+    image: spoonest/clickhouse-tabix-web-client
+    ports:
+      - "8100:80"  # 映射端口
+    networks:
+      - ch_ntw   
+
+networks:
+  ch_ntw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.222.1.0/24
