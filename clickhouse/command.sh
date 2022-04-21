@@ -59,3 +59,6 @@ clickhouse-client --password 123456 --multiquery --query "select * from system.c
 
 # 将查询结果导出csv文件
 clickhouse-client --password 123456 --query "select * from system.clusters limit 1" >/tmp/result.csv
+
+# kill session
+KILL QUERY WHERE query_id = '<id>';
