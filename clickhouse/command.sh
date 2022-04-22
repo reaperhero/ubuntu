@@ -60,5 +60,8 @@ clickhouse-client --password 123456 --multiquery --query "select * from system.c
 # 将查询结果导出csv文件
 clickhouse-client --password 123456 --query "select * from system.clusters limit 1" >/tmp/result.csv
 
+
+clickhouse-client --query "INSERT INTO tutorial.hits_v1 FORMAT TSV" --max_insert_block_size=100000 < hits_v1.tsv
+
 # kill session
 KILL QUERY WHERE query_id = '<id>';
