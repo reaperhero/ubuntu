@@ -1,0 +1,81 @@
+<clickhouse> 
+  <users> 
+    <yandex> 
+      <profiles> 
+        <default> 
+          <max_memory_usage>10000000000</max_memory_usage>  
+          <load_balancing>random</load_balancing> 
+        </default>  
+        <role1> 
+          <!-- 只有读权限 -->  
+          <readonly>1</readonly>  
+          <allow_ddl>0</allow_ddl>
+          <allow_experimental_live_view>1</allow_experimental_live_view>  
+          <distributed_product_mode>allow</distributed_product_mode>   
+          <databases> 
+            <default> 
+              <!--默认数据库-->  
+              <test_row_level> 
+                <!--表名称-->  
+                <filter>id 10</filter> 
+              </test_row_level>  
+            </default> 
+          </databases> 
+        </role1>  
+        <role2> 
+          <!-- 有读权限和设置参数权限 -->  
+          <readonly>2</readonly>  
+          <allow_ddl>0</allow_ddl> 
+        </role2> 
+      </profiles>  
+      <users> 
+        <!-- 定义用户信息 -->  
+        <default> 
+          <password/>  
+          <networks incl="networks" replace="replace"> 
+            <ip>::/0</ip> 
+          </networks>  
+          <profile>default</profile>  
+          <quota>default</quota> 
+        </default>  
+        <user_demo> 
+          <networks incl="networks" replace="replace"> 
+            <ip>::/0</ip> 
+          </networks>  
+          <password>123</password>  
+          <profile>default</profile>  
+          <quota>default</quota>  
+          <allow_databases> 
+            <database>xxx</database>  
+            <database>xxx2</database> 
+          </allow_databases>  
+          <allow_dictionaries> 
+            <dictionariy>xxx</dictionariy> 
+          </allow_dictionaries> 
+        </user_demo>  
+        <root> 
+          <networks incl="networks" replace="replace"> 
+            <ip>::/0</ip> 
+          </networks>  
+          <password_sha256_hex>4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2</password_sha256_hex>  
+          <profile>default</profile>  
+          <quota>default</quota> 
+        </root> 
+      </users>  
+      <quotas> 
+        <!-- 配置熔断信息 -->  
+        <default> 
+          <interval> 
+            <duration>3600</duration>  
+            <!-- 时间周期 单位：秒 -->  
+            <queries>0</queries>  
+            <errors>0</errors>  
+            <result_rows>0</result_rows>  
+            <read_rows>0</read_rows>  
+            <execution_time>0</execution_time> 
+          </interval> 
+        </default> 
+      </quotas> 
+    </yandex> 
+  </users> 
+</clickhouse>

@@ -3,6 +3,10 @@
 
 ## 配置文件说明
 
+https://zhuanlan.zhihu.com/p/445202157
+
+https://www.cnblogs.com/zhoujinyi/tag/ClickHouse/
+
 ```
 <remote_servers incl="clickhouse_remote_servers" >
     <my_shard>         # 是cluster名称,任意填写,在后面通过这个名字引用如 on cluster my_shard

@@ -36,3 +36,7 @@ while [ $count -lt 5 ]; do echo $count; ((count++)); done
 for i in `seq 10`; do curl -v http://baidu.com; done
 
 
+
+echo ${my_name:0:2}  # 截取字符串
+echo ${#my_name}     # 获取字符串长度
+

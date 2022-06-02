@@ -1,11 +1,8 @@
-drop table if exists `user`;
-CREATE TABLE `user` (
- `id` varchar(10) NOT NULL,
- `username` varchar(10) NOT NULL,
- `password` varchar(10) NOT NULL,
- PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+-- 做count聚合的时候空字符串算在其中，而null则不计算；
+-- 做模糊查找的[not] like的时候null会被过滤掉，空字符串不会；
+-- 计算字符串长度的时候null等于null，空字符串等于0；
+-- 条件中使用<> "" 不但会剔除空字符串，同样null也会剔除；
+-- 条件中使用 = "" 只会出现有空字符串的内容，但null的会被剔除；
 
 -- 内连接（inner join）
 
@@ -60,3 +57,16 @@ select a.* from A a where exists(select 1 from B b where a.id=b.id)
 
 -- in是先把后边的语句查出来放到临时表中，然后遍历临时表，将临时表的每一行，代入外查询去查找。
 select * from Awhere id in(select id from B)
+
+
+SELECT CONCAT('MySQL', '字符串', '函数') AS str;
+SELECT LOWER('MySQL字符串函数') AS str1, LCASE('MySQL字符串函数') AS str2;
+SELECT UPPER('MySQL字符串函数') AS str1, UCASE('MySQL字符串函数') AS str2;
+SELECT LENGTH('MySQL字符串函数') AS len1, OCTET_LENGTH('MySQL字符串函数') AS len2;
+SELECT CHAR_LENGTH('MySQL字符串函数') AS len1, CHARACTER_LENGTH('MySQL字符串函数') AS len2;
+SELECT SUBSTRING('MySQL字符串函数', 0,6) AS str1  // pos 可以为负数，此时返回的子串从字符串右侧第 pos 个字符开始
+SELECT SUBSTRING_INDEX('张三;李四;王五', ';', 2) AS str1,  // 第 count 个分隔符 delim 之前的子串。如果 count 为正数，从左侧开始计数并返回左侧的所有字符；如果 count 为负数，从右侧开始计数并返回右侧的所有字符
+SELECT TRIM('  MySQL字符串函数  ') AS str1,
+SELECT TRIM(LEADING 'M' FROM '  MySQL字符串函数M') AS str1,  //  删除两侧字符串M
+
+
