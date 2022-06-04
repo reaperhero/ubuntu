@@ -68,5 +68,15 @@ SELECT SUBSTRING('MySQL字符串函数', 0,6) AS str1  // pos 可以为负数，
 SELECT SUBSTRING_INDEX('张三;李四;王五', ';', 2) AS str1,  // 第 count 个分隔符 delim 之前的子串。如果 count 为正数，从左侧开始计数并返回左侧的所有字符；如果 count 为负数，从右侧开始计数并返回右侧的所有字符
 SELECT TRIM('  MySQL字符串函数  ') AS str1,
 SELECT TRIM(LEADING 'M' FROM '  MySQL字符串函数M') AS str1,  //  删除两侧字符串M
+SELECT LPAD(123, 6, '0') AS str1, LPAD(123, 2, '0') AS str2,  // LPAD (str,len,padstr) 函数表示字符串 str 的左侧使用 padstr 进行填充，直到长度为 len；RPAD (str,len,padstr) 函数表示在字符串 str 的右侧使用 padstr 进行填充，直到长度为 len
+SELECT REPEAT('🔥', 5) AS str;
 
+select INSTR('MySQL字符串函数', '字符串') AS index1,  // INSTR (str,substr) 函数用于返回子串 substr 在字符串 str 中第一次出现的索引位置，没有找到子串时返回 0
+SELECT LOCATE('S','MySQL Server', 5) AS ind; // LOCATE (substr,str,pos) 函数返回子串 substr 在字符串 str 中从位置 pos 开始第一次出现的索引位置
+
+SELECT FIELD('李四', '张三', '李四', '王五') AS ind;  //  FIELD (str,str1,str2,str3,…) 函数返回字符串 str 在后续字符串列表中出现的位置，没有找到时返回 0
+SELECT FIND_IN_SET('李四', '张三,李四,王五') AS ind;  // FIND_IN_SET (str,strlist) 函数返回字符串 str 在列表字符串 strlist 中出现的位置，strlist 由 N 个子串使用逗号分隔组
+SELECT REPLACE('MySQL字符串函数', '字符串', '日期') AS str1,
+SELECT INSERT('MySQL字符串函数', 6, 3, '日期') AS str;  // INSERT (str,pos,len,newstr) 函数用于在字符串 str 的指定位置 pos 之后插入子串 newstr，替换随后的 len 个字符
+SELECT REVERSE('上海自来水来自海上')='上海自来水来自海上' AS "回文";
 
