@@ -199,7 +199,7 @@ SET GLOBAL log_output = 'TABLE';
 SET GLOBAL general_log = 'ON';   //日志开启
 SET GLOBAL general_log = 'OFF';  //日志关闭
 
-SELECT * from mysql.general_log ORDER BY event_time DESC;  查看日志
+SELECT *,CONVERT(argument USING utf8) from mysql.general_log ORDER BY event_time DESC;  查看日志
 tail -f /var/log/mariadb/mariadb.log
 ```
 
