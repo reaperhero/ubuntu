@@ -2,7 +2,13 @@
 # systemctl restart docker
 # docker 代理加速地址
 {
-  "registry-mirrors": ["https://mirror.ccs.tencentyun.com"],
+  "registry-mirrors": [
+    "https://dockerproxy.com",
+    "https://1nj0zren.mirror.aliyuncs.com",
+    "https://docker.mirrors.ustc.edu.cn",
+    "http://f1361db2.m.daocloud.io",
+    "https://dockerhub.azk8s.cn"
+  ],
   "insecure-registries" : ["myregistrydomain.com:5000"]
 }
 
