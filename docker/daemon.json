@@ -1,15 +1,13 @@
 # path = /etc/docker/daemon.json
 # systemctl restart docker
 # docker 代理加速地址
+
 {
-  "registry-mirrors": [
-    "https://dockerproxy.com",
-    "https://1nj0zren.mirror.aliyuncs.com",
-    "https://docker.mirrors.ustc.edu.cn",
-    "http://f1361db2.m.daocloud.io",
-    "https://dockerhub.azk8s.cn"
+  "graph": "/data/docker",
+  "insecure-registries": [
+      "0.0.0.0/0"
   ],
-  "insecure-registries" : ["myregistrydomain.com:5000"]
+  "registry-mirrors": [
+      "http://hub-mirror.c.163.com"
+  ]
 }
-
-
