@@ -17,3 +17,12 @@ def downloadSpec =
 b = "ccc"
 
 println(b)
+
+retry = 5
+
+for (int i = 0; i < retry; i++) {
+    if (i == 4) {
+        return
+    }
+    println(i)
+}
