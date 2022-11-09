@@ -1,12 +1,25 @@
 version: '2'
 services:
-  grafana:
-    image: grafana/grafana:6.5.0
+  grafana85:
+    image:  grafana/grafana:8.5.14
     container_name: grafana
     ports:
-      - "3000:3000"
+      - "3011:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin321
-    # volumes:
-      # - /data/grafana:/var/lib/grafana
+    volumes:
+      - 85data:/var/lib/grafana
+
+  sqliteweb:
+    image: coleifer/sqlite-web:latest
+    container_name: sqliteweb
+    ports:
+      - 3012:8080
+    environment:
+      - SQLITE_DATABASE=grafana.db
+    volumes:
+      - 85data:/data
+
+volumes:
+  85data:
