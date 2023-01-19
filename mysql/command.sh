@@ -67,26 +67,6 @@ FLUSH PRIVILEGES;
 ```
 
 
-
-
-mysql锁问题
-```
-show global variables like 'innodb_lock_w%';   等待 50 秒后报Lock wait timeout exceeded
-select concat('KILL ',id,';') from information_schema.processlist where INFO like '%monitor_task_id%';  指定类型会话kill
-select * from information_schema.innodb_trx;  查看有是哪些事务占据了表资源
-SELECT * FROM information_schema.innodb_trx;  事务表
-SELECT * FROM information_schema.innodb_locks;  锁表
-SELECT * FROM information_schema.innodb_lock_waits; 锁等待的对应关系
-select * from sys.innodb_lock_waits\G;
-```
-
-
-死锁解决思路
-```
-1、show engine innodb status \G;  显示最后的一次死锁
-2、SELECT * FROM information_schema.innodb_trx\G;  根据死锁事物查询sql
-```
-
 ```
 select * from information_schema.processlist where Host like  '%192.168.10.10%'\G;
 kill 209876

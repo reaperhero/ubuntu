@@ -11,6 +11,11 @@ git branch --set-upstream-to=origin/master master
 ```
 
 
+### 超时
+```
+git config --global http.lowSpeedLimit 1000
+git config --global http.lowSpeedTime 6000
+```
 
 ### git全局配置
 
