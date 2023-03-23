@@ -6,7 +6,7 @@ CREATE DATABASE `ide`  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
 
 alter table seonoco_user AUTO_INCREMENT=1000;   # 修改主键自增id
-SET SQL_SAFE_UPDATES = 0;     # 可以更新字段
+SET SQL_SAFE_UPDATES = 0;                       # 可以更新字段
 ```
       
 
