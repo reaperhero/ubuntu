@@ -1,0 +1,68 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "collection",
+      "rootUri": "file:///C:/Users/chenqiangjun/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/collection-1.17.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "dio",
+      "rootUri": "file:///C:/Users/chenqiangjun/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/dio-5.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///C:/Users/chenqiangjun/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/http_parser-4.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "meta",
+      "rootUri": "file:///C:/Users/chenqiangjun/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/meta-1.9.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path",
+      "rootUri": "file:///C:/Users/chenqiangjun/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/path-1.8.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "source_span",
+      "rootUri": "file:///C:/Users/chenqiangjun/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/source_span-1.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "string_scanner",
+      "rootUri": "file:///C:/Users/chenqiangjun/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/string_scanner-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "term_glyph",
+      "rootUri": "file:///C:/Users/chenqiangjun/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/term_glyph-1.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "typed_data",
+      "rootUri": "file:///C:/Users/chenqiangjun/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/typed_data-1.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "ducafecat",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    }
+  ],
+  "generated": "2023-05-03T15:18:39.572949Z",
+  "generator": "pub",
+  "generatorVersion": "2.19.6"
+}
