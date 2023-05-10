@@ -11,6 +11,7 @@ FLUSH PRIVILEGES;
 
 批量替换
 update 表名 set 字段1 = replace(字段1,'c','C'); 
+update post set title =  REGEXP_REPLACE(title, '([0-9]+) test of regex', '$1 test') 
 
 
 查询用户权限
@@ -41,4 +42,12 @@ WHERE
 5、flush privileges
 6、取消skip-grant-tables参数，重新启动mysql，并登入开始做授权
 7、GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+```
+
+
+- 设置sqlmode
+
+```
+show global variables like '%sql_mode%';
+set global sql_mode="ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_VALUE_ON_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"; 
 ```

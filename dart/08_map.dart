@@ -1,7 +1,7 @@
 void main() {
   // 初始
   // var a = {'name': 'ducafecat', 'web': 'www.ducafecat.tech'};
-  // print(a);
+  // print(a['name']);
 
   // 声明
   // 松散
