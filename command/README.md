@@ -101,6 +101,20 @@ SKY_BLUE_PREFIX="\033[36m"
 ```
 
 
+- demo
+```
+~$ A=1;echo $A;{ A=2; };echo $A
+1
+2
+
+~$ A=1;echo $A;( A=2; );echo $A
+1
+1
+
+[ "$?" -ne "0" ] &&  echo "FAIL";exit 1 ||  echo "SUCC"
+
+```
+
 - 正则
 ```
 需要转义：\{1,3\}  \(hello\)
