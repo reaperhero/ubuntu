@@ -111,6 +111,7 @@ SKY_BLUE_PREFIX="\033[36m"
 1
 1
 
+if [ "$?" -ne "0" ]; then   echo "FAIL";   exit 1; else   echo "SUCC"; fi
 [ "$?" -ne "0" ] &&  echo "FAIL";exit 1 ||  echo "SUCC"
 
 ```

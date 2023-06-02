@@ -2,7 +2,12 @@
 
 
 
+
 ```
+docker save nginx:latest  | gzip > nginx.tar.gz
+gunzip -c nginx.tar.gz | docker load
+
+
 docker rm `docker ps -q -f status=exited`
 docker rmi -f `docker images | awk '{print $3}'`
 docker run --volumes-from dbdata -v ${pwd}:/backup --name worker ubuntu tar cvf /baskup/baukup.tar /dbdata
