@@ -1,0 +1,12 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: gcp-helm-git-resource
+  namespace: tekton-pipelines
+spec:
+  type: git
+  params:
+  - name: url
+    value: http://gitlab.xxx.com/xxx/manifests.git
+  - name: revision
+    value: dev

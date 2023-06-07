@@ -1,0 +1,59 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: gcp-pipeline
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: imageTag
+      default: v0.0.2
+    - name: kubectl_script
+      type: string
+  resources:
+    - name: src-git-repo
+      type: git
+    - name: image-repo
+      type: image
+    - name: helm-git-repo
+      type: git
+  tasks:
+  - name: gcp-maven-test
+    taskRef:
+      name: gcp-maven-test
+    resources:
+      inputs:
+        - name: src-git-repo
+          resource: src-git-repo
+  - name: gcp-maven-kaniko-build
+    taskRef:
+      name: gcp-maven-kaniko-build
+    params:
+      - name: imageTag
+        value: $(params.imageTag)
+    resources:
+      inputs:
+        - name: src-git-repo
+          resource: src-git-repo
+      outputs:
+        - name: image-repo
+          resource: image-repo
+  - name: gcp-kubectl-deploy
+    taskRef:
+      name: gcp-kubectl-deploy
+    params:
+      - name: script_body
+        value: $(params.kubectl_script)
+  - name: gcp-helm-deploy
+    taskRef:
+      name: gcp-helm-deploy
+    params:
+      - name: imageTag
+        value: $(params.imageTag)
+    resources:
+      inputs:
+        - name: helm-git-repo
+          resource: helm-git-repo
+        - name: image-repo
+          resource: image-repo
+          from:
+            - gcp-maven-kaniko-build

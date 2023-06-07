@@ -1,0 +1,40 @@
+# kubectl get components testsvc -oyaml
+apiVersion: core.oam.dev/v1alpha2
+kind: Component
+metadata:
+  creationTimestamp: "2021-01-26T08:24:55Z"
+  generation: 1
+  labels:
+    application.oam.dev: first-vela-app
+  name: testsvc
+  namespace: default
+  ownerReferences:
+  - apiVersion: core.oam.dev/v1alpha2
+    controller: true
+    kind: Application
+    name: first-vela-app
+    uid: a603e28a-b52a-4b5f-ae6c-be57de887c51
+  resourceVersion: "2662686"
+  selfLink: /apis/core.oam.dev/v1alpha2/namespaces/default/components/testsvc
+  uid: eb6a8f1a-c8e5-4140-b5e8-ad5864862c4b
+spec:
+  workload:
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        workload.oam.dev/type: webservice
+    spec:
+      selector:
+        matchLabels:
+          app.oam.dev/component: testsvc
+      template:
+        metadata:
+          labels:
+            app.oam.dev/component: testsvc
+        spec:
+          containers:
+          - image: crccheck/hello-world
+            name: testsvc
+            ports:
+            - containerPort: 8000

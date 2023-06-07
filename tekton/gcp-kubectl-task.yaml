@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: gcp-kubectl-deploy
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: script_body
+      type: string
+      default: "kubectl version"
+  steps:
+    - name: kubectl-deploy
+      image: lachlanevenson/k8s-kubectl
+      script: |
+        $(params.script_body)

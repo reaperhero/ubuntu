@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: gcp-helm-deploy
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: release_namespace
+      default: "tekton-pipelines"
+    - name: charts_dir
+      default: "autotest/cloudsandbox-charts"
+    - name: release_name
+      default: "scheduler-ast"
+    - name: values_file
+      default: "autotest/cloudsandbox-ast-slave.yaml"
+    - name: imageTag
+      default: "latest"
+  resources:
+    inputs:
+      - name: helm-git-repo
+        type: git
+      - name: image-repo
+        type: image
+  steps:
+    - name: deploy-chart
+      image: docker.io/lachlanevenson/k8s-helm:v3.3.4
+      workingDir: /workspace/helm-git-repo
+      script: |
+        echo current installed helm releases
+        helm list --namespace "$(params.release_namespace)"
+        echo installing helm chart...
+        helm upgrade --install --wait --values "$(params.values_file)" --namespace "$(params.release_namespace)" $(params.release_name) $(params.charts_dir) --set  "deploy.init_copyfiles_image=$(resources.inputs.image-repo.url):$(params.imageTag)"

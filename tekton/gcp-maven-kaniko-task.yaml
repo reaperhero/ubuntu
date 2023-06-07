@@ -1,0 +1,47 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: gcp-maven-kaniko-build
+  namespace: tekton-pipelines
+spec:
+  params:
+    - name: imageTag
+      type: string
+  resources:
+    inputs:
+      - name: src-git-repo
+        type: git
+    outputs:
+      - name: image-repo
+        type: image
+  steps:
+  - name: maven-build
+    image: maven:3.5.0-jdk-8-alpine
+    workingDir: /workspace/src-git-repo
+    command:
+      - mvn
+    args:
+      - clean
+      - package
+    volumeMounts:
+      - name:  m2
+        mountPath:  /root/.m2
+  - name: kaniko-build
+    image: cnych/kaniko-executor:v0.22.0
+    workingDir: /workspace/kaniko
+    env:
+    - name: DOCKER_CONFIG
+      value: /tekton/home/.docker
+    command:
+    - /kaniko/executor
+    - --dockerfile=$(resources.inputs.src-git-repo.path)/Dockerfile
+    - --context=$(resources.inputs.src-git-repo.path)
+    - --destination=$(resources.outputs.image-repo.url):$(params.imageTag)
+    - --insecure
+    - --skip-tls-verify
+    - --skip-tls-verify-pull
+    - --insecure-pull
+  volumes:
+   - name: m2
+     hostPath:
+      path: /root/.m2

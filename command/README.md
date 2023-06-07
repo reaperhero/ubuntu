@@ -114,6 +114,23 @@ SKY_BLUE_PREFIX="\033[36m"
 if [ "$?" -ne "0" ]; then   echo "FAIL";   exit 1; else   echo "SUCC"; fi
 [ "$?" -ne "0" ] &&  echo "FAIL";exit 1 ||  echo "SUCC"
 
+
+i=1
+sum=0
+until ((i > 100))    # unti 循环和 while 循环恰好相反，当判断条件不成立时才进行循环
+do
+    ((sum += i))
+    ((i++))
+done
+echo "The sum is: $sum"
+
+
+
+#!/bin/bash
+while [ $# != 0 ];do
+    echo "第一个参数为：$1,参数个数为：$#"
+    shift    # shift命令用于对参数的移动(左移)
+done
 ```
 
 - 正则

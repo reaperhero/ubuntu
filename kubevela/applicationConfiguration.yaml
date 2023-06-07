@@ -1,0 +1,63 @@
+apiVersion: core.oam.dev/v1alpha2
+kind: ApplicationConfiguration
+metadata:
+  creationTimestamp: "2021-01-26T04:23:03Z"
+  finalizers:
+  - scope.finalizer.core.oam.dev
+  generation: 1
+  labels:
+    application.oam.dev: first-vela-app
+  name: first-vela-app
+  namespace: default
+  ownerReferences:
+  - apiVersion: core.oam.dev/v1alpha2
+    controller: true
+    kind: Application
+    name: first-vela-app
+    uid: 5b2c0284-0bd1-4c4c-a671-0fa8c7684b26
+  resourceVersion: "39680262"
+  selfLink: /apis/core.oam.dev/v1alpha2/namespaces/default/applicationconfigurations/first-vela-app
+  uid: 00bc284d-c57f-4b52-a177-31753520c619
+spec:
+  components:
+  - componentName: testsvc
+    scopes:
+    - scopeRef:
+        apiVersion: core.oam.dev/v1alpha2
+        kind: HealthScope
+        name: first-vela-app-default-health
+    traits:
+    - trait:
+        apiVersion: standard.oam.dev/v1alpha1
+        kind: Route
+        metadata:
+          labels:
+            trait.oam.dev/type: route
+        spec:
+          host: testsvc.example.com
+          provider: nginx
+status:
+  conditions:
+  - lastTransitionTime: "2021-01-31T22:49:03Z"
+    reason: ReconcileSuccess
+    status: "True"
+    type: Synced
+  dependency: {}
+  observedGeneration: 1
+  workloads:
+  - componentName: testsvc
+    componentRevisionName: testsvc-v3
+    scopes:
+    - scopeRef:
+        apiVersion: core.oam.dev/v1alpha2
+        kind: HealthScope
+        name: first-vela-app-default-health
+    traits:
+    - traitRef:
+        apiVersion: standard.oam.dev/v1alpha1
+        kind: Route
+        name: testsvc-route-c4575497d
+    workloadRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: testsvc

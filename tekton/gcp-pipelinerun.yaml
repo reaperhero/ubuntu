@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  namespace: tekton-pipelines
+  generateName: gcp-pipeline-run-
+spec:
+  serviceAccountName: build-bot
+  pipelineRef:
+    name: gcp-pipeline
+  params:
+    - name: imageTag
+      value: v0.0.3
+    - name: kubectl_script
+      value: "kubectl get pod"
+  resources:
+    - name: src-git-repo
+      resourceRef:
+        name: gcp-git-resource
+    - name: image-repo
+      resourceRef:
+        name: gcp-image-resource
+    - name: helm-git-repo
+      resourceRef:
+        name: gcp-helm-git-resource
