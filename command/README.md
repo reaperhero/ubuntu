@@ -131,6 +131,100 @@ while [ $# != 0 ];do
     echo "第一个参数为：$1,参数个数为：$#"
     shift    # shift命令用于对参数的移动(左移)
 done
+
+
+#!/bin/bash
+
+# Add two numeric value
+((sum=25+35))
+
+#Print the result
+echo $sum
+
+for((i=0;i<3;i++));do
+  touch test_$i.txt
+done
+
+if [ -e /tmp ]
+then
+    echo "dir exists!"
+else
+    echo "dir not exists"
+fi
+
+# if [ -e /tmp  ]; then echo "dir exists!"; else echo "dir not exists" fi
+
+
+count=0
+while [ $count -lt 5 ]
+do
+    echo $count
+    ((count++))
+done
+
+
+
+count=0
+while [ $count -lt 5 ]; do echo $count; ((count++)); done
+
+
+
+
+for i in `seq 10`; do curl -v http://baidu.com; done
+
+
+
+echo ${my_name:0:2}  # 截取字符串
+echo ${#my_name}     # 获取字符串长度
+
+
+if [[ "5" > "4" ]] && [[ "1" == "1" ]] && [ -f "user.md" ]
+then
+    echo 1
+else
+    echo 2
+fi
+
+
+#!/bin/bash
+if [[ "5" > "4" ]] && [[ "1" == "1" ]] && [ -f "user.md" ]
+then
+    echo 1
+else
+    echo 2
+
+fi
+
+
+echo 3
+
+
+if [ -z "$pid" ]
+then 
+	echo "pid not exist";
+	exit 1;
+else
+	echo $pid | grep -E -q "[[:space:]]" && echo "pid not unique" && echo 1
+fi
+
+
+#!/bin/bash
+export PATH=$PATH
+nc -w 10 -z 172.16.128.230 80  > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+      echo "Network is Open."
+else
+      echo "Network is Closed."
+fi
+
+list=(
+    URL1
+    URL1
+)
+for i in ${list[*]}
+do 
+    echo $i
+done
 ```
 
 - 正则
