@@ -1,6 +1,12 @@
 # pipeline
 
 
+- Task: 构建任务, 可以定义一些列的 steps. 每个 step 由一个 container 执行.
+- TaskRun: task 实际的执行, 并提供执行所需的参数. 这个对象创建后, 就会有 pod 被创建.
+- Pipeline: 定义一个或者多个 task 的执行, 以及 PipelineResource 和各种定义参数的集合
+- PipelineRun: 类似 task 和 taskrun 的关系: 一个定义一个执行. PipelineRun 则是 pipeline 的实际执行. 创建后也会创建 pod 来执行各个 task.
+
+
 ```
 kubectl apply -f gcp-git-resource.yaml \
 	gcp-git-secret.yaml \

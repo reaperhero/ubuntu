@@ -74,3 +74,11 @@ git revert HEAD   //撤销最近一次提交(也可以指定版本)，产生一�
 
 直接从那个错误的提交的前一次拉取一份代码放到其他目录，然后将master代码全部删除，把那份新代码方进去，然后提交，果然简单粗暴啊，虽然这种方法不入流，但是，实践中发现很好使啊
 ```
+
+- gitignore规则不生效的解决办法
+
+```
+git rm -r --cached .
+git add .
+git commit -m 'update .gitignore'
+```

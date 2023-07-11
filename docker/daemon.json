@@ -3,7 +3,8 @@
 # docker 代理加速地址
 
 {
-  "graph": "/data/docker",
+  "data-root": "/var/lib/docker",
+  "ipv6": false,
   "insecure-registries": [
       "0.0.0.0/0"
   ],
