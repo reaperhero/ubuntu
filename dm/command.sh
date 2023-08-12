@@ -1,0 +1,4 @@
+
+
+
+./disql SYSDBA/SYSDBA001@127.0.0.1:5236
