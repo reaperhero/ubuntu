@@ -12,6 +12,9 @@ SELECT * FROM user_tables;    -- 查看当前用户的表
 select * from all_tab_columns; -- 查看有哪些字段
 select * from dba_data_files; -- 查看表空间数据文件信息
 select * from dba_free_space; -- 查看数据文件空闲信息
+SELECT CONCAT('drop TABLE ',TABLE_NAME) FROM user_tables;    -- 批量删除表
+
+select SF_GET_UNICODE_FLAG();  -- 查看达梦数据库编码： 0 表示 GB18030，1 表示 UTF-8，2 表示 EUC-KR
 
 create tablespace  tablespaceName datafile '/data/dm/data/DAMENG/hive_meta.dbf' size 100 autoextend on next 1 maxsize 2048;
 SELECT * FROM DBA_DATA_FILES 
