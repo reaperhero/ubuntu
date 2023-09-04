@@ -74,3 +74,17 @@ Zookeeper中特有的Watcher注册于异步通知机制，能够很好地实现�
 首先创建/master_election/2016-11-12节点，客户端集群每天会定时往该节点下创建临时节点，如/master_election/2016-11-12/binding，这个过程中，只有一个客户端能够成功创建，此时其变成master，其他节点都会在节点/master_election/2016-11-12上注册一个子节点变更的Watcher，用于监控当前的Master机器是否存活，一旦发现当前Master挂了，其余客户端将会重新进行Master选举。
 
 
+
+
+
+
+## 监听机制
+```
+1、None：连接建立事件
+2、NodeCreated：节点创建
+3、NodeDeleted：节点删除
+4、NodeDataChanged：节点数据变化
+5、NodeChildrenChanged：子节点列表变化
+6、DataWatchRemoved：节点监听被移除
+7、ChildWatchRemoved：子节点监听被移除
+```
