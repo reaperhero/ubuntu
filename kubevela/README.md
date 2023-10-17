@@ -7,19 +7,8 @@ unzip vela-v1.9.0-beta.1.post1-darwin-amd64.zip
 sudo mv darwin-amd64/vela /usr/local/bin/vela
 ```
 
-- command
-
+- define
 ```
-vela up -f vela.yaml  // 创建应用
-vela status webservice-app // 获取应用的部署状态
-vela delete webservice-app 
-vela workflow resume webservice-app  // 人工审核
-vela def list  -n default             // 查看模块定义列表
-vela show redis    // 查看模块定义 
-
-vela logs vela-app-with-sidecar -c count-log  // 查看 Sidecar 所输出的日志
-
-
 ComponentDefinition
 TraitDefinition
 WorkflowStepDefinition
@@ -55,3 +44,25 @@ ApplicationConfiguration 定义了一个应用程序的配置，通过component�
 
 
 [内置运维特征列表](https://www.bookstack.cn/read/kubevela-1.8-zh/0cc1a25d596fddb8.md)
+
+
+
+```
+runningWorkflow	executing	当工作流正在执行时，应用的状态为 runningWorkflow
+workflowSuspending	suspending	当工作流暂停时，应用的状态为 workflowSuspending
+workflowTerminated	terminated	当工作流被终止时，应用的状态为 workflowTerminated
+workflowFailed	failed	当工作流执行完成，且有步骤失败时，应用的状态为 workflowFailed
+running	succeeded	当工作流中所有步骤都成功执行后，应用的状态为 running
+```
+
+
+## application controller执行过程
+
+Application Controller 每次对于应用的轮询包括若干阶段 parsed->revision->policy->reder->exec workflow->state keep-> gc，其中根据 application 状态和配置的不同，会有选择性跳过部分步骤的执行。
+- parsed阶段：加载component、trait、policy、workflowstep中定义的需要的所有cue模板，生成appfile
+- revision阶段：计算hash值，生成appRev、hash值的计算不包含app.status和app.workflow
+- policy阶段: policy预留了部署k8s资源的策略，算是社区预留策略
+- render阶段：执行cue模板的渲染工作（json merge），生成要部署的manifest
+- exec workflow阶段：部署manifest到k8s 的apiserver，通过APIService路由到clustergateway，分发到不同的子集群
+- state-keep阶段：检查集群中资源状态是否和内存中一致
+- gc阶段：对关联的资源进行回收

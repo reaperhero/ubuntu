@@ -1,4 +1,4 @@
-name: first-vela-app
+name:  webservice-app
 services:
   testsvc:
     type: webservice
