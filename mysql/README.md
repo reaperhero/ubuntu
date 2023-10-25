@@ -61,6 +61,7 @@ show full processlist;                  当前连接数
 时间，可以默认1970-01-01 08:00:01
 
 
-`default_time_field` TIMESTAMP NOT NULL DEFAULT '1970-01-01 08:00:01'    // '0000-00-00 00:00:00'
+`default_time_field` TIMESTAMP NOT NULL DEFAULT '1970-01-01 08:00:01'    // '0001-01-01 00:00:00'
+`default_time_field` DATETIME DEFAULT CURRENT_TIMESTAMP                  // 5.6.5及之后的版本中，可以使用CURRENT_TIMESTAMP作为datetime类型列的默认值
 
 ```
