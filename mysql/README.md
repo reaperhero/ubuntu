@@ -65,3 +65,28 @@ show full processlist;                  当前连接数
 `default_time_field` DATETIME DEFAULT CURRENT_TIMESTAMP                  // 5.6.5及之后的版本中，可以使用CURRENT_TIMESTAMP作为datetime类型列的默认值
 
 ```
+
+
+
+## 锁
+
+悲观锁方案：每次获取商品时，对该商品加排他锁。也就是在用户A获取获取 id=1 的商品信息时对该行记录加锁，期间其他用户阻塞等待访问该记录。悲观锁适合写入频繁的场景。
+```
+begin;
+
+select * from goods where id = 1 for update;
+
+update goods set stock = stock - 1 where id = 1;
+
+commit;
+```
+乐观锁方案：每次获取商品时，不对该商品加锁。在更新数据的时候需要比较程序中的库存量与数据库中的库存量是否相等，如果相等则进行更新，反之程序重新获取库存量，再次进行比较，直到两个库存量的数值相等才进行数据更新。乐观锁适合读取频繁的场景。
+```
+select * from goods where id = 1
+
+begin;
+
+update goods set stock = stock - 1 where id = 1 and stock = cur_stock;
+
+commit;
+```

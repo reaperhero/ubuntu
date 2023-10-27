@@ -21,14 +21,3 @@ yum install docker-ce-18.09.0-3.el7 # 安装指定版本的docker  假如：yum 
 yum list -y kubeadm --showduplicates # 查询可用的版本
 yum install -y kubeadm-1.16.4-0 kubectl-1.16.4-0 kubelet-1.16.4-0
 
-
-def mysql_image = null
-def easy_agent_server_image = null
-def matrix_image = null
-def manage_front_image = null
-def ntpd_image = null
-def grafana_image = null
-def alertmanager_image = null
-def pushgateway_image = null
-def prometheus_image = null
-def dtalert_image = null
