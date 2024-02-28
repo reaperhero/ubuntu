@@ -1,18 +1,15 @@
 version: '3'
 services:
   mysql_compose-01:
-    image: mysql:5.7
+    # image: mysql:5.7
+    image: mysql/mysql-server:8.0.32
     restart: always
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
     ports:
       - "3306:3306/tcp"
-    volumes:
-      - mysqldb:/var/lib/mysql
+    # volumes:
+    #   - mysqldb:/var/lib/mysql
     container_name: mysql_compose-01
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
       TZ: "Asia/Shanghai"
-
-
-volumes:
-  mysqldb:
