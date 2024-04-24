@@ -34,6 +34,9 @@ select TOP 20* from V$SYSTEM_LONG_EXEC_SQLS ORDER BY EXEC_TIME DESC;
 select * from V$LONG_EXEC_SQLS order by EXEC_TIME DESC limit 0,20;
 
 
+select * from dba_objects where OBJECT_NAME= 'DTAGENT'
+
+
 CREATE SCHEMA SCHEMA1 AUTHORIZATION SYSDBA;
 
 -- 用户与模式的对应关系

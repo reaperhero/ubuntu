@@ -27,4 +27,7 @@ pipreqs . --force --encoding=utf8  # 当前项目生成依赖requirements.txt
 pip install -r requirements.txt  # 安装依赖
 
 pip3 install -r requirements.txt -i http://pypi.douban.com/simple
+
+pip install django -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+
 ```

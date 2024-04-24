@@ -21,10 +21,6 @@ deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security universe
 EOF
 
 
-apt-cache madison kubelet               # 查询可用的版本
-apt-get install -y  kubelet=1.19.3-00   # 安装指定版本
-
-
 cat > /etc/apt/sources.list << EOF
 deb http://mirrors.aliyun.com/debian/ buster main non-free contrib
 deb-src http://mirrors.aliyun.com/debian/ buster main non-free contrib
@@ -55,8 +51,30 @@ deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main
 deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe
 deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security universe
 EOF
+
+
+# ubuntu 22
+cat > /etc/apt/sources.list << EOF
+deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+EOF
+apt update
+
+
+apt-cache madison kubelet               # 查询可用的版本
+apt-get install -y  kubelet=1.19.3-00   # 安装指定版本
 apt-get update
+apt-get install binutils
 apt-get install debian-keyring
 apt-get install debian-archive-keyring
+apt install --only-upgrade libc6
 
 

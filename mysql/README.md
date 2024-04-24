@@ -1,5 +1,15 @@
 # mysql
 
+
+多版本并发控制
+
+MVCC 是一种并发控制的方法，一般在数据库管理系统中，实现对数据库的并发访问
+
+MVCC只在 READ COMMITTED 和 REPEATABLE READ 两个隔离级别下工作
+
+
+
+
 ## 函数
 - 常用函数
 
@@ -89,4 +99,61 @@ begin;
 update goods set stock = stock - 1 where id = 1 and stock = cur_stock;
 
 commit;
+```
+
+
+
+
+
+
+
+- 常用语句
+
+```
+创建只读账户
+CREATE USER 'readuser_name'@'%' IDENTIFIED BY 'readuser_password';
+GRANT SELECT ON *.* TO 'readuser_name'@'%';
+FLUSH PRIVILEGES;
+
+批量替换
+update 表名 set 字段1 = replace(字段1,'c','C'); 
+update post set title =  REGEXP_REPLACE(title, '([0-9]+) test of regex', '$1 test') 
+
+
+查询用户权限
+select * from mysql.user;
+```
+
+
+- update
+
+```
+UPDATE artikel 
+SET 
+    amount = CASE
+        WHEN amount - minimuminventory - 2 < 0 THEN amount = amount - 2
+        ELSE amount = 99
+    END
+WHERE
+    artnr = 17;
+```
+
+- 重置密码
+
+```
+1、在mysqld参数重添加skip-grant-tables
+2、systemctl restart mariadb.service
+3、空密码登入 mysql -u root
+4、update mysql.user set password=PASSWORD('newpassword') where user='root';
+5、flush privileges
+6、取消skip-grant-tables参数，重新启动mysql，并登入开始做授权
+7、GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+```
+
+
+- 设置sqlmode
+
+```
+show global variables like '%sql_mode%';
+set global sql_mode="ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_VALUE_ON_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"; 
 ```

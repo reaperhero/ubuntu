@@ -50,3 +50,6 @@ COPY cmd app   把cmd目录下的东西copy到app下，app目录不存在会创�
 COPY main.go README.md app/  复制文件到目标目录下，必须要有/
 COPY main.go app  复制文件，并重命名
 ```
+
+
+[docker指定架构](https://yeasy.gitbook.io/docker_practice/buildx/multi-arch-images)
