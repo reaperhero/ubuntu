@@ -147,13 +147,13 @@ SET SQL_SAFE_UPDATES = 0;
 - 慢日志
 
 ```
-show variables like 'slow_query%';
+show variables like 'slow_query%';   
 show variables like 'long_query_time';
 show variables like 'slow_query_log_file';
 show variables like '%log_output%';
 
 set global log_output='TABLE';   or FILE
-set global slow_query_log='ON'; 
+set global slow_query_log='ON';   // OFF
 set global long_query_time=3;   // 要重连才能看见
 
 SELECT start_time,
@@ -166,6 +166,11 @@ SELECT start_time,
        CONVERT(sql_text USING utf8)
 FROM mysql.slow_log order by start_time desc
 ```
+
+MySQL5.7的锁等待超时的SQL是没有被记录在慢SQL日志中的(sql执行了，但是没执行成功)
+MySQL8.0中，锁等待超时的SQL也会被记录在慢SQL记录中
+低于min_examined_row_limit参数指定的值(扫描的行小于这个值，不记录)
+query_time是累计了lock_time的
 
 - sql日志
 

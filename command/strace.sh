@@ -14,3 +14,4 @@ tail -f /proc/55382/fd/2
 
 strace -p 13357 -ewrite -o 1.log           # 运行的进程系统级别日志，被kill时有日志
 strace -p 13357 -ewrite | grep 'write(1,'  # 打印运行中的进程标准输出
+

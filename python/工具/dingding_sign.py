@@ -29,6 +29,7 @@ def read_count():
     return int(result)
 
 
+# https://developer.aliyun.com/article/999042
 def send_ding():
     # secret = 'SEC45b11425097210f9a396d07cb929e3547fe7bef9586ccfb49d8651804e1efa6b'
     # url = "https://oapi.dingtalk.com/robot/send?access_token=0733281e8a948bb044fadf817e9562e769f9c637cc08112cc6ab5636d3259215"

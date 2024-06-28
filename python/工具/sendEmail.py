@@ -13,7 +13,7 @@ receivers = ['chenqiangjun@163.com']  # 接收邮件，可设置为你的QQ邮�
  
 content = '我用Python'
 title = '人生苦短'  # 邮件主题
- 
+
 def sendEmail():
  
     message = MIMEText(content, 'plain', 'utf-8')  # 内容, 格式, 编码
