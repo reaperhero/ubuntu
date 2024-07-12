@@ -153,6 +153,7 @@ show variables like 'slow_query_log_file';
 show variables like '%log_output%';
 
 set global log_output='TABLE';   or FILE
+
 set global slow_query_log='ON';   // OFF
 set global long_query_time=3;   // 要重连才能看见
 
@@ -165,6 +166,8 @@ SELECT start_time,
        db,
        CONVERT(sql_text USING utf8)
 FROM mysql.slow_log order by start_time desc
+
+min_examined_row_limit = 0
 ```
 
 MySQL5.7的锁等待超时的SQL是没有被记录在慢SQL日志中的(sql执行了，但是没执行成功)
