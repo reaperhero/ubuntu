@@ -20,3 +20,11 @@ ALTER TABLE "USER" MODIFY  "CREATER_ID" NULL;      # 设置字段默认值
 
 ALTER TABLE "USER" MODIFY  USER_NAME  VARCHAR(150);   # 修改字段长
 alter table "USER" modify  DFQZ int;                  # 修改字段类型(慎用)
+
+
+# tips
+
+```
+
+设置CASE_SENSITIVE = 0; 可以兼容mysql（大佬说的，还没试过）
+```

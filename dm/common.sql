@@ -14,6 +14,24 @@ select * from dba_data_files; -- 查看表空间数据文件信息
 select * from dba_free_space; -- 查看数据文件空闲信息
 SELECT CONCAT('drop TABLE ',TABLE_NAME) FROM user_tables;    -- 批量删除表
 
+
+set feed 10; -- 分页显示
+
+SET SCHEMA SALES; -- 切换模式，从当前模式切换到SALES模式
+
+
+drop schema "dtagent" cascade;  -- 删除模式
+
+select  USERNAME,NAME AS SCHEMA_NAME,TYPE$ 
+FROM SYSOBJECTS A,DBA_USERS B 
+WHERE A.PID=B.USER_ID AND A.TYPE$='SCH' AND B.USERNAME='DTAGENT';  -- 查看当前用户拥有的模式
+
+select * from V$PARAMETER;   -- 查询参数
+
+select * from  v$DM_INI where para_name = 'COMPATIBLE_MODE' -- 查看兼容模式
+
+select * from v$option where PARA_NAME='GLOBAL_STR_CASE_SENSITIVE'; -- 查询大小写敏感
+
 select SF_GET_UNICODE_FLAG();  -- 查看达梦数据库编码： 0 表示 GB18030，1 表示 UTF-8，2 表示 EUC-KR
 
 create tablespace  tablespaceName datafile '/data/dm/data/DAMENG/hive_meta.dbf' size 100 autoextend on next 1 maxsize 2048;
@@ -47,18 +65,6 @@ SELECT table_name, constraint_name, constraint_type FROM all_constraints WHERE o
 
 
 -- 创建表
-CREATE TABLE IF NOT EXISTS update_time_test
-(
-    id int NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-    name varchar(32) NOT NULL DEFAULT '' COMMENT 'schema名称',
-    create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    creator varchar(255) NOT NULL DEFAULT '' COMMENT '创建人id',
-    last_modify_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改时间',
-    status int DEFAULT '1' COMMENT '状态 0:草稿，1:正常',
-    deleted int DEFAULT '0' COMMENT '删除状态 0:未删除，1:已删除',
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE employee
 (
   employee_id INTEGER,
@@ -99,3 +105,11 @@ INSERT INTO irm_department (id, active, create_time, creator_id, deleted, level,
 
 -- 查看有哪些schema
 select NAME, ID, PID, CRTDATE from SYS.SYSOBJECTS where TYPE$='SCH'
+
+
+
+ALTER TABLE 旧表名 RENAME TO 新表名; -- 修改表名
+
+ALTER TABLE 表名 RENAME COLUMN 旧字段名 TO 新字段名; -- 修改字段名
+
+

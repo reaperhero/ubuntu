@@ -9,6 +9,13 @@ alter table seonoco_user AUTO_INCREMENT=1000;   # 修改主键自增id
 SET SQL_SAFE_UPDATES = 0;                       # 可以更新字段
 ```
       
+会话
+```
+show status like '%Threads_connected%';  查看当前打开的连接的数量：
+show full processlist;   查看连接状态
+show status like '%Threads_running%';  查看不在睡眠的线程数
+```
+
 
 ```
 show columns from table_name from database_name; -- 显示表中列名称。
