@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=ldap://your_ldap_server_ip
+      - PHPLDAPADMIN_HTTPS=false
+    volumes:
+      - ./data:/var/lib/phpldapadmin

@@ -11,7 +11,8 @@
 # docker info
 
 
-docker pull  --platform linux/arm64 mysql:8.0.35
+docker pull --platform linux/amd64  mysql:8.0.37-debia
+docker pull --platform linux/arm64 mysql:8.0.35
 docker pull nginx:stable-perl@sha256:a48175e7029f0ae21b8b4e2526d6c3dd7278a8479be0e666d729b6234108f4e1
 
 

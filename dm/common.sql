@@ -21,6 +21,7 @@ SET SCHEMA SALES; -- 切换模式，从当前模式切换到SALES模式
 
 
 drop schema "dtagent" cascade;  -- 删除模式
+DROP USER "dtagent" CASCADE;      -- 删除用户
 
 select  USERNAME,NAME AS SCHEMA_NAME,TYPE$ 
 FROM SYSOBJECTS A,DBA_USERS B 
