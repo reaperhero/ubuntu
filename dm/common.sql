@@ -114,3 +114,5 @@ ALTER TABLE 旧表名 RENAME TO 新表名; -- 修改表名
 ALTER TABLE 表名 RENAME COLUMN 旧字段名 TO 新字段名; -- 修改字段名
 
 
+
+update table_name set table_field = RTRIM(table_field); -- 去除字段尾部的空格

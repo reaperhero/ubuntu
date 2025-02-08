@@ -8,7 +8,8 @@ services:
       LD_LIBRARY_PATH: "/opt/dmdbms/bin"
       UNICODE_FLAG: 1  
       LENGTH_IN_CHAR: 0
-      SYSDBA_PWD: "SYSDBA001" 
+      SYSDBA_PWD: "SYSDBA001"  
+      COMPATIBLE_MODE: 2   #  1Oracle 2MySQL 3SQL Server  4PostgreSQL
     ports:
       - "5236:5236"
     volumes:
@@ -22,3 +23,14 @@ volumes:
 # UNICODE_FLAG 字符集 (0)，可选值： 0[GB18030]， 1[UTF-8]， 2[EUC-KR]
 # 默认密码就是SYSDBA001 这里修改默认密码不一定会起效，需要进数据库改
 # 时区上海
+
+
+
+
+# 启动后的dm，设置模式
+# 连接dm后
+# -- 设置兼容模式为 MySQL
+# SP_SET_PARA_VALUE(2, 'COMPATIBLE_MODE', 2);   // 最后一个数字：
+# -- 提交更改
+# COMMIT;
+# 重启dm
