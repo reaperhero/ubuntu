@@ -9,7 +9,6 @@ services:
       UNICODE_FLAG: 1  
       LENGTH_IN_CHAR: 0
       SYSDBA_PWD: "SYSDBA001"  
-      COMPATIBLE_MODE: 2   #  1Oracle 2MySQL 3SQL Server  4PostgreSQL
     ports:
       - "5236:5236"
     volumes:
@@ -30,7 +29,8 @@ volumes:
 # 启动后的dm，设置模式
 # 连接dm后
 # -- 设置兼容模式为 MySQL
-# SP_SET_PARA_VALUE(2, 'COMPATIBLE_MODE', 2);   // 最后一个数字：
+# SP_SET_PARA_VALUE(2, 'COMPATIBLE_MODE', 2);   // 最后一个数字 0:None 1:SQL92 2:Oracle 3:MS SQL Server  4:MySQL 5:DM6  6:Teradata 7:PG
+
 # -- 提交更改
 # COMMIT;
 # 重启dm
