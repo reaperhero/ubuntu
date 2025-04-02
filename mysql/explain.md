@@ -2,6 +2,14 @@ https://zhuanlan.zhihu.com/p/341595489
 
 
 # 字段说明
+
+- id
+SELECT识别符。这是SELECT的查询序列号。SQL执行的顺序的标识，SQL从大到小的执行。id列有以下几个注意点：
+
+id相同时，执行顺序由上至下。
+id不同时，如果是子查询，id的序号会递增，id值越大优先级越高，越先被执行
+
+
 - select_type
 表示SELECT的类型，常见的取值有：
 
