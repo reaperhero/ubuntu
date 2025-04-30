@@ -1,0 +1,6 @@
+java.net包
+java.net包提供了网络编程相关的类和接口，用于实现网络通信。
+
+Socket和ServerSocket类用于建立客户端和服务端的套接字连接。
+URL和URLConnection类用于处理URL地址和进行HTTP通信。
+InetAddress类用于表示IP地址和主机名

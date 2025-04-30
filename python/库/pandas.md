@@ -2,6 +2,12 @@
 https://mp.weixin.qq.com/s/vsKuWyj-DWq2EPdLWYFklw
 
 
+全局参数
+```
+pd.set_option('display.max_rows', None)     # 显示所有行
+pd.set_option('display.max_columns', None)  # 显示所有列
+```
+
 常用基本函数
 ```
 1.head和tail
