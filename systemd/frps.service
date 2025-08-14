@@ -1,0 +1,17 @@
+[Unit]
+Description=FRP Server (Fast Reverse Proxy)
+After=network.target
+After=network-online.target
+Wants=network-online.target
+
+
+[Service]
+Type=simple
+ExecStart=/root/frpserver/frp_0.62.1_linux_amd64/frps -c /root/frpserver/frp_0.62.1_linux_amd64/frps.ini
+Restart=always
+LimitNOFILE=65536
+RestartSec=60
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target

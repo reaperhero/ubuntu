@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 # 2. 获取5分钟K线数据（默认返回较多历史数据）
-df = ak.futures_zh_minute_sina(symbol='rb2505', period="5")
+df = ak.futures_zh_minute_sina(symbol='sc2508', period="5")
 
 # 3. 转换为时间类型并筛选过去48小时
 df["datetime"] = pd.to_datetime(df["datetime"])
