@@ -81,6 +81,9 @@ CREATE TABLE department
   department_name VARCHAR(30) NOT NULL
 );
 
+
+DESC 模式名.表名;  -- 查看表结构
+
 -- 若该表存在则删除
 DROP TABLE IF EXISTS department; 
 
