@@ -1,7 +1,8 @@
 version: '2.3'
 services:
   dm8:
-    image: 872694792/dm8_single:v8.1.2.128_ent_x86_64_ctm_pack4
+    # image: 872694792/dm8_single:v8.1.2.128_ent_x86_64_ctm_pack4
+    image: registry.cn-hangzhou.aliyuncs.com/easymanager/dm8_single:0.1.0  # apecloud/dm8_single:0.1.0
     container_name: dm8
     environment:
       TZ: Asia/Shanghai
