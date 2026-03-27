@@ -25,3 +25,6 @@ nvm use 16
 
 export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
 nvm install 12.16.0
+
+# 默认版本
+nvm alias default 12.16.0

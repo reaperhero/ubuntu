@@ -79,6 +79,11 @@ select * from information_schema.processlist where Host like  '%192.168.10.10%'\
 kill 209876
 ```
 
+
+# 备份并清理，只保留5个最新文件  百分号 % 在 crontab 中需要转义
+45 17 * * * mysqldump -h 172.16.0.1 -uroot -p123 -B license > /root/worker/backup/license_$(date +\%Y\%m\%d_\%H\%M\%S).sql && ls -t /root/worker/backup/license_*.sql | tail -n +6 | xargs -r rm
+
+
 备份恢复
 ```
 mysqldump -h 192.168.1.10 -uroot -p123456 -B finance rank > 1.sql  备份多个库
