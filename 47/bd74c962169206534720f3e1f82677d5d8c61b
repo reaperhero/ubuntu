@@ -1,0 +1,19 @@
+kingbase/README.md
+  s_2f202cb07bbbea::t_7d45ce5c7a7d6f 1-314
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.4",
+  "base_commit_sha": "47bd74c962169206534720f3e1f82677d5d8c61b",
+  "prompts": {},
+  "sessions": {
+    "s_2f202cb07bbbea": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e1af9-29f5-7ec0-b83a-9afaa573c203",
+        "model": "gpt-5.4"
+      },
+      "human_author": "chenqiangjun <manlu@dtstack.com>"
+    }
+  }
+}
